@@ -1,0 +1,47 @@
+<html>
+  <head><meta charset="utf-8" />
+    <style>
+      @font-face { font-family: "A"; font-style: normal; font-weight: 400; font-display: swap;
+        src: url("https://abrudz.github.io/SAX2/SAX2.ttf") format("truetype"); }
+      * { font-family: "A"; }
+
+      form { display: flex; flex-direction: row; justify-content: center;
+        border: 1px solid grey; padding: 3px; border-radius: 1.6125px; }
+        form * { border: none; }
+
+      input { font-size: 21px; flex: 1; width: 100%; padding: 8px; }
+        input:focus { outline: none; }
+      
+      main { 
+        width: 33%; 
+      }   
+    </style>
+  </head>
+  <center>
+    <h1>+⌿÷≢ ←→ {(+⌿⍵)÷(≢⍵)}</h1>
+    <h2>Transform tacit APL into dfn form.</h2>
+    <main>
+      <form><input id="expr" /><button type="button" onclick="explain();">Help</button></form>
+      <form><input id="prfx" /></form>
+      <form><input id="infx" /></form>
+    </main>
+  </center>
+
+  <script>
+    async function explain() {
+      await fetch("/explain", {
+        headers: {
+          "Content-Type": "application/json; charset=utf-8",
+        },
+        method: "POST",
+        body: JSON.stringify(document.getElementById("expr").value),
+      }).then((res) =>
+        res.text().then((dfn) => {
+          const values = JSON.parse(dfn);
+          document.getElementById("prfx").value = values[0];
+          document.getElementById("infx").value = values[1];
+        })
+      );
+    }
+  </script>
+</html>

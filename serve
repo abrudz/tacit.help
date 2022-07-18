@@ -1,0 +1,3 @@
+#!/usr/local/bin/dyalogscript
+
+⎕FIX'file://Jarvis.dyalog' ⋄ Jarvis.Run 'jarvis.json'
