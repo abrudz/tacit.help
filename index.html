@@ -37,6 +37,7 @@
         body: JSON.stringify(document.getElementById("expr").value),
       }).then((res) =>
         res.text().then((dfn) => {
+          console.log(dfn)
           const values = JSON.parse(dfn);
           document.getElementById("prfx").value = values[0];
           document.getElementById("infx").value = values[1];
