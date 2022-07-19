@@ -6,13 +6,21 @@
 
       body{background:#e8e8e8;}
 
-      form:first-of-type { display: flex; flex-direction: row; justify-content: center;
+      form { display: flex; flex-direction: row; justify-content: center;
         border: 1px solid grey; padding: 0.618ex; box-shadow: 2px 1.618px 0px 0.2px black; }
       
         form * { border: none; }
 
-      input,textarea{ font-size: 21px; flex: 1; width: 100%; padding: 8px; overflow-wrap: break-word; resize: none; }
-        input:focus,textarea:focus { outline: none; }
+        * { box-sizing: border-box;}
+
+      input,div{ font-size: 21px; flex: 1; width: 100%; padding: 8px; overflow-wrap: break-word; resize: none; }
+        input:focus,div:focus { outline: none; }
+
+        section *{ margin-top: 1em; }
+
+      div {
+        background: white;
+      }
       
       main { 
         width: 33%; 
@@ -24,8 +32,10 @@
     <h2>Transform tacit APL into dfn form.</h2>
     <main>
       <form><input id="expr" autocomplete="off" spellcheck="false" oninput="f()" /></form>
-      <form><textarea readonly id="prfx" /></textarea> </form>
-      <form><textarea readonly id="infx" /></textarea></form>
+      <section>
+      <div id="prfx">&nbsp;</div>
+      <div id="infx">&nbsp;</div>
+    </section>
     </main>
   </center>
 
@@ -49,8 +59,8 @@
             (await MessagePack.decodeAsync(event.data.stream())).stdout
           )
         );
-        document.getElementById("prfx").value = values[0];
-        document.getElementById("infx").value = values[1];
+        document.getElementById("prfx").textContent = values[0];
+        document.getElementById("infx").textContent = values[1];
       };
     }
   </script>
