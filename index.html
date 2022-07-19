@@ -6,35 +6,61 @@
 
       body{background:#e8e8e8;}
 
-      form { display: flex; flex-direction: row; justify-content: center;
-        border: 1px solid grey; padding: 0.618ex; box-shadow: 2px 1.618px 0px 0.2px black; }
-      
-        form * { border: none; }
+      .container{ display: flex; flex-direction: row; justify-content: center; width: 100%; margin: 0; }
 
-        * { box-sizing: border-box;}
+      * { box-sizing: border-box;}
 
-      input,div{ font-size: 21px; flex: 1; width: 100%; padding: 8px; overflow-wrap: break-word; resize: none; }
+      input,.o{ font-size: 21px; flex: 1; padding: 8px; overflow-wrap: break-word; resize: none; text-align: left; border: none;}
         input:focus,div:focus { outline: none; }
 
-        section *{ margin-top: 1em; }
-
-      div {
+      .o {
         background: white;
+      }
+
+      .container {
+        margin-top: 1.618em;
       }
       
       main { 
-        width: 33%; 
-      }   
+        width: 33%;
+      }
+
+      label{
+        font-size: 18px;
+        font-weight: 600;
+      }
+
+      .container label:first-child{
+        background: #ccc;
+        text-align: center;
+        width: 3.5em;
+      }
+
+      .arrow{
+        width: 3em;
+        text-align: center;
+      }
+
+
     </style>
   </head>
   <center>
-    <h1>+⌿÷≢ ←→ {(+⌿⍵)÷(≢⍵)}</h1>
+    <h1>(+⌿÷≢)Y ←→ {(+⌿⍵)÷(≢⍵)}Y</h1>
     <h2>Transform tacit APL into dfn form.</h2>
     <main>
-      <form><input id="expr" autocomplete="off" spellcheck="false" oninput="f()" /></form>
+      <div class="container">
+        <label><pre>f</pre></label><label class="arrow"><pre> ← </pre></label>
+        <input id="expr" autocomplete="off" spellcheck="false" oninput="f()" />
+      </div>
       <section>
-      <div id="prfx">&nbsp;</div>
-      <div id="infx">&nbsp;</div>
+      <div class="container">
+        <label><pre>f Y</pre></label><label class="arrow"><pre> ←→ </pre></label>
+      <div class="o" id="prfx">&nbsp;</div>
+    </div>
+    <div class="container">
+        <label><pre>X f Y</pre></label><label class="arrow"><pre> ←→ </pre></label>
+    <div class="o" id="infx">&nbsp;</div>
+    </div>
     </section>
     </main>
   </center>

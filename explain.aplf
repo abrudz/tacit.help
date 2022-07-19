@@ -1,30 +1,30 @@
 ∇ r←explain train
  :With ⎕NS''
-     p∆f←'+-×÷⌈⌊*⍟|!○~∨∧⍱⍲<≤=≥>≠≡≢⍴,⍪⍳↑↓?⍒⍋⍉⌽⊖∊⊥⊤⍎⍕⌹⊂⊃∪∩⍷⌷⊆⊢⊣⍸'
-     s∆f←'/⌿\⍀'
-     m∆o←'/⌿\⍀¨&⌶⌸'
-     d∆o←'.@∘⍛⍣⍥⍠⍤⌺'
+     p∆f ← '+-×÷⌈⌊*⍟|!○~∨∧⍱⍲<≤=≥>≠≡≢⍴,⍪⍳↑↓?⍒⍋⍉⌽⊖∊⊥⊤⍎⍕⌹⊂⊃∪∩⍷⌷⊆⊢⊣⍸'
+     s∆f ← '/⌿\⍀'
+     m∆o ← '/⌿\⍀¨&⌶⌸'
+     d∆o ← '.@∘⍛⍣⍥⍠⍤⌺'
 
-     Name←(' ',,∘' '),∘(⍕⎕UCS)
-     Esc ← ''''∘{⊃,/3⍴¨@(⍺∘=)⍵}
+     Name ← (' ',,∘' '),∘(⍕⎕UCS)
+     Esc  ← ''''∘{⊃,/3⍴¨@(⍺∘=)⍵}
      (p∆n s∆n m∆n d∆n)←'∆∆⍙⍙'Name¨¨p∆f s∆f m∆o d∆o
 
-     ∆ZLIDE←'⍬'⍨
+     ∆ZLIDE ← '⍬'⍨
      ∆RANK  ← {⍺←⊢ ⋄ f←⍺ ⋄ c ← (,'⊢')≢⎕cr'f' ⋄ Pad (⍕⍺),(Pad(Dfn Drop(c⍴'⍺')⍺⍺'⍵'),'⍤',⍕⍵⍵),⍵}
      ∆OUTER ← {⍺←⊢ ⋄ Pad (⍕⍺),(⍺⍺,'.',(Dfn Drop '⍺' ⍵⍵ '⍵')),⍵}
 
-     Drop←{0=×/⍴r←⊃↓/1 ¯1,⊂⍵:⍵ ⋄ r}
+     Drop ← {0=×/⍴r←⊃↓/1 ¯1,⊂⍵:⍵ ⋄ r}
 
-     _Lit←⍠'Regex' 0
-     Zilde←('⍬'⎕R(' ∆ZLIDE ')_Lit)          ⍝ ⍬
-     Slash←((,d∆o∘.,s∆f)⎕R(,d∆o∘.,s∆n)_Lit) ⍝ @/
-     Rank←(('⍤',¨⎕D)⎕R(' ∆RANK '∘,¨⎕D)_Lit) ⍝ ⍤X
-     Outer ← ('∘.'⎕R(' ''∘'' ∆OUTER ')_Lit) ⍝ ∘.
+     _Lit  ← ⍠'Regex' 0
+     Zilde ← (          '⍬'⎕R(' ∆ZLIDE ')_Lit) ⍝ ⍬
+     Slash ← ( (,d∆o∘.,s∆f)⎕R(,d∆o∘.,s∆n)_Lit) ⍝ @/
+     Rank  ← (    ('⍤',¨⎕D)⎕R(' ∆RANK '∘,¨⎕D)  _Lit) ⍝ ⍤X
+     Outer ← (         '∘.'⎕R(' ''∘'' ∆OUTER ')_Lit) ⍝ ∘.
 
 
-     _Assign_←{⍎⍺,⍺⍺,⍵,⍵⍵}
-     Pad←'(',,∘')'
-     Dfn←'{',,∘'}'
+     _Assign_ ← {⍎⍺,⍺⍺,⍵,⍵⍵}
+     Pad ← '(',,∘')'
+     Dfn ← '{',,∘'}'
      (p∆n,s∆n)('←{⍺←{⍵ ⋄ ⍺⍺} ⋄ (Pad⍣(⍬≢⍵)) (⍕⍺),'''_Assign_''',(⍕⍵) }')¨p∆f,s∆f
 
      m∆n('←{⍺←⊢ ⋄ Pad (⍕⍺),(⍕⍺⍺,⍬),'''_Assign_''',        (⍕⍵)}')¨m∆o
@@ -44,16 +44,17 @@
      ⍙9060←{⍺←⊢ ⋄ ⍵≡⍬:(⍕⍺⍺,⍬),'⍤',(⍕⍵⍵,⍬) ⋄ ⍺(⍺⍺⍤⍵⍵)⍵}
 
      train ← (('''[^'']+''',⍥⊆' *\'∘,¨p∆f,m∆o,d∆o)⎕R('&',p∆n,m∆n,d∆n))Outer Slash Zilde Rank Esc train
-     f ← {⊂Dfn Drop⍵}
 
     :Trap 0
-        o←f (⍎train)'⍵'
+        o←⊂{⍵,'Y'} Dfn Drop (f ← ⍎train)'⍵'
+        :If 2∊⎕nc'f' ⋄ o ← 'SYNTAX ERROR' ⋄ :EndIf
     :Else
         o←⎕DMX.(Message{⍵,⍺,⍨': '/⍨×≢⍺}⎕EM 200|EN-200)
     :EndTrap
 
     :Trap 0
-        p←f '⍺'(⍎train)'⍵'
+        p←⊂{'X',⍵,'Y'} Dfn Drop '⍺'(f ← ⍎train)'⍵'
+        :If 2∊⎕nc'f' ⋄ p ← 'SYNTAX ERROR' ⋄ :EndIf
     :Else
         p←⎕DMX.(Message{⍵,⍺,⍨': '/⍨×≢⍺}⎕EM 200|EN-200)
     :EndTrap
