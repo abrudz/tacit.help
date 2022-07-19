@@ -2,11 +2,13 @@
   <head><meta charset="utf-8" />
     <script src="msgpack.min.js"></script>
     <style>
-      @font-face { font-family: "A"; src: url("https://abrudz.github.io/SAX2/SAX2.ttf") }
-      * { font-family: "A"; }
+      @font-face { font-family: A; src: local('SAX2'), url(SAX2.ttf) }*{font-family: A;}
 
-      form { display: flex; flex-direction: row; justify-content: center;
-        border: 1px solid grey; padding: 3px; border-radius: 1.6125px; }
+      body{background:#e8e8e8;}
+
+      form:first-of-type { display: flex; flex-direction: row; justify-content: center;
+        border: 1px solid grey; padding: 0.618ex; box-shadow: 2px 1.618px 0px 0.2px black; }
+      
         form * { border: none; }
 
       input { font-size: 21px; flex: 1; width: 100%; padding: 8px; }
@@ -21,22 +23,27 @@
     <h1>+⌿÷≢ ←→ {(+⌿⍵)÷(≢⍵)}</h1>
     <h2>Transform tacit APL into dfn form.</h2>
     <main>
-      <form><input id="expr" /><button type="button" onclick="run();">Help</button></form>
+      <form id="field"><input id="expr" /><button type="button" onclick="run();">Help</button></form>
       <form><input id="prfx" /></form>
       <form><input id="infx" /></form>
     </main>
   </center>
 
   <script>
+    document.getElementById("field").addEventListener("submit", (e) => {
+      e.preventDefault();
+      run();
+    });
+
     run = async () => {
-      const explain = await fetch('explain.aplf').then(r=>r.text()).then(_=>_);
+      const explain = await fetch('explain.aplf').then(r=>r.text())
 
       let socket = new WebSocket("wss://dyalog.run/api/v0/ws/execute");
       socket.onopen = () =>
         socket.send(
           MessagePack.encode({
             language: "dyalog_apl",
-            code: explain + "\n ⎕ ← explain '" + document.getElementById("expr").value + "'",
+            code: explain + "\n ⎕ ← explain '" + document.getElementById("expr").value.replace(/\'/g, "''") + "'",
             timeout: 5,
           })
         );

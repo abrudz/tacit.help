@@ -6,7 +6,7 @@
      d∆o←'.@∘⍛⍣⍥⍠⍤⌺'
 
      Name←(' ',,∘' '),∘(⍕⎕UCS)
-
+     Esc ← ''''∘{⊃,/3⍴¨@(⍺∘=)⍵}
      (p∆n s∆n m∆n d∆n)←'∆∆⍙⍙'Name¨¨p∆f s∆f m∆o d∆o
 
      ∆ZLIDE←'⍬'⍨
@@ -43,7 +43,7 @@
      ⍙8728←{⍺←⊢ ⋄ ⍵≡⍬:(⍕⍺⍺,⍬),'∘',(⍕⍵⍵,⍬) ⋄ ⍺(⍺⍺∘⍵⍵)⍵}
      ⍙9060←{⍺←⊢ ⋄ ⍵≡⍬:(⍕⍺⍺,⍬),'⍤',(⍕⍵⍵,⍬) ⋄ ⍺(⍺⍺⍤⍵⍵)⍵}
 
-     train ← (('''[^'']+''',⍥⊆' *\'∘,¨p∆f,m∆o,d∆o)⎕R('&',p∆n,m∆n,d∆n))Outer Slash Zilde Rank train
+     train ← (('''[^'']+''',⍥⊆' *\'∘,¨p∆f,m∆o,d∆o)⎕R('&',p∆n,m∆n,d∆n))Outer Slash Zilde Rank Esc train
      f ← {⊂Dfn Drop⍵}
 
     :Trap 0
