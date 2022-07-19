@@ -1,8 +1,8 @@
 <html>
   <head><meta charset="utf-8" />
+    <script src="msgpack.min.js"></script>
     <style>
-      @font-face { font-family: "A"; font-style: normal; font-weight: 400; font-display: swap;
-        src: url("https://abrudz.github.io/SAX2/SAX2.ttf") format("truetype"); }
+      @font-face { font-family: "A"; src: url("https://abrudz.github.io/SAX2/SAX2.ttf") }
       * { font-family: "A"; }
 
       form { display: flex; flex-direction: row; justify-content: center;
@@ -21,28 +21,35 @@
     <h1>+⌿÷≢ ←→ {(+⌿⍵)÷(≢⍵)}</h1>
     <h2>Transform tacit APL into dfn form.</h2>
     <main>
-      <form><input id="expr" /><button type="button" onclick="explain();">Help</button></form>
+      <form><input id="expr" /><button type="button" onclick="run();">Help</button></form>
       <form><input id="prfx" /></form>
       <form><input id="infx" /></form>
     </main>
   </center>
 
   <script>
-    async function explain() {
-      await fetch("/explain", {
-        headers: {
-          "Content-Type": "application/json; charset=utf-8",
-        },
-        method: "POST",
-        body: JSON.stringify(document.getElementById("expr").value),
-      }).then((res) =>
-        res.text().then((dfn) => {
-          console.log(dfn)
-          const values = JSON.parse(dfn);
-          document.getElementById("prfx").value = values[0];
-          document.getElementById("infx").value = values[1];
-        })
-      );
+    run = async () => {
+      const explain = await fetch('explain.aplf').then(r=>r.text()).then(_=>_);
+
+      let socket = new WebSocket("wss://dyalog.run/api/v0/ws/execute");
+      socket.onopen = () =>
+        socket.send(
+          MessagePack.encode({
+            language: "dyalog_apl",
+            code: explain + "\n ⎕ ← explain '" + document.getElementById("expr").value + "'",
+            timeout: 5,
+          })
+        );
+
+      socket.onmessage = async (event) => {
+        const values = JSON.parse(
+          new TextDecoder().decode(
+            (await MessagePack.decodeAsync(event.data.stream())).stdout
+          )
+        );
+        document.getElementById("prfx").value = values[0];
+        document.getElementById("infx").value = values[1];
+      };
     }
   </script>
 </html>
