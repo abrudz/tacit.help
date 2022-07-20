@@ -43,8 +43,11 @@
             timeout: 5,
           })
         );
-      }
+    } else {
+      document.getElementById("prfx").textContent = " ";
+      document.getElementById("infx").textContent = " ";
     }
+  }
 
       socket.onmessage = async (event) => {
         const values = JSON.parse(
