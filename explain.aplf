@@ -4,12 +4,15 @@
      s∆f ← '/⌿\⍀'
      m∆o ← '/⌿\⍀¨⍨&⌶⌸'
      d∆o ← '.@∘⍛⍣⍥⍠⍤⌺'
+     u∆f ← ⎕C ⎕A
+
+     A B C D E F G H I J K L M N O P Q R S T U V W X Y Z ← ⎕A
 
      _Op ← {(1=≢62⎕atx'⍺⍺')∨3≠40 ⎕atx'⍺⍺' : ⍕⍺⍺,⍬ ⋄ Dfn Drop (⍺⍴'⍺') ⍺⍺ '⍵'}
 
      Name ← (' ',,∘' '),∘(⍕⎕UCS)
      Esc  ← ''''∘{⊃,/3⍴¨@(⍺∘=)⍵}
-     (p∆n s∆n m∆n d∆n)←'∆∆⍙⍙'Name¨¨p∆f s∆f m∆o d∆o
+     (p∆n s∆n u∆n m∆n d∆n)←'∆∆∆⍙⍙'Name¨¨p∆f s∆f u∆f m∆o d∆o
 
      ∆ZLIDE ← '⍬'⍨
      ∆OUTER ← {⍺←⊢ ⋄ f←⍺ ⋄ (,'⊢')≡⎕cr'f': ∘.×'' ⋄ Pad (⍕⍺),(Pad ⍺⍺,'.',1 ⍵⍵_Op ⍬),⍵}
@@ -24,7 +27,7 @@
      _Assign_ ← {⍎⍺,⍺⍺,⍵,⍵⍵}
      Pad ← '(',,∘')'
      Dfn ← '{',,∘'}'
-     (p∆n,s∆n)('←{⍺←{⍵ ⋄ ⍺⍺} ⋄ (Pad⍣(⍬≢⍵)) (⍕⍺),'''_Assign_''',(⍕⍵) }')¨p∆f,s∆f
+     (p∆n,u∆n,s∆n)('←{⍺←{⍵ ⋄ ⍺⍺} ⋄ (Pad⍣(⍬≢⍵)) (⍕⍺),'''_Assign_''',(⍕⍵) }')¨p∆f,u∆f,s∆f
 
      m∆n('←{⍺←⊢ ⋄ Pad (⍕⍺),(Pad (1 (⍺⍺_Op) ⍬),'''_Assign_'''),          (⍕⍵)}')¨m∆o
      d∆n('←{⍺←⊢ ⋄ Pad (⍕⍺),(Pad (1 (⍺⍺_Op) ⍬),'''_Assign_''',(⍵⍵_Op⍨1)),(⍕⍵)}')¨d∆o
@@ -39,7 +42,7 @@
      ⍙9061←{⍺←⊢ ⋄ ⍵≡⍬:(⍕⍺⍺,⍬),'⍥',(⍕⍵⍵,⍬) ⋄ ⍺(⍺⍺⍥⍵⍵)⍵}
      ⍙8728←{⍺←⊢ ⋄ ⍵≡⍬:(⍕⍺⍺,⍬),'∘',(⍕⍵⍵,⍬) ⋄ ⍺(⍺⍺∘⍵⍵)⍵}
 
-     train ← (('''[^'']+''',⍥⊆' *\'∘,¨p∆f,m∆o,d∆o)⎕R('&',p∆n,m∆n,d∆n))Outer Slash Zilde Esc train
+     train ← ((('''[^'']+''') ,⍥⊆ u∆f,' *\'∘,¨p∆f,m∆o,d∆o)⎕R('&',u∆n,p∆n,m∆n,d∆n))Outer Slash Zilde Esc train
 
     :Trap 0
         o←⊂({⍵,'Y'}⍣pretty) Dfn Drop (f ← ⍎train)'⍵'
