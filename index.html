@@ -74,7 +74,7 @@
         socket.send(
           MessagePack.encode({
             language: "dyalog_apl",
-            code: explain + "\n ⎕ ← explain '" + document.getElementById("expr").value.replace(/\'/g, "''") + "'",
+            code: explain + "\n ⎕ ← 1 explain '" + document.getElementById("expr").value.replace(/\'/g, "''") + "'",
             timeout: 5,
           })
         );

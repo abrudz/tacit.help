@@ -1,60 +1,56 @@
-∇ r←explain train
+∇ r←pretty explain train
  :With ⎕NS''
      p∆f ← '+-×÷⌈⌊*⍟|!○~∨∧⍱⍲<≤=≥>≠≡≢⍴,⍪⍳↑↓?⍒⍋⍉⌽⊖∊⊥⊤⍎⍕⌹⊂⊃∪∩⍷⌷⊆⊢⊣⍸'
      s∆f ← '/⌿\⍀'
-     m∆o ← '/⌿\⍀¨&⌶⌸'
+     m∆o ← '/⌿\⍀¨⍨&⌶⌸'
      d∆o ← '.@∘⍛⍣⍥⍠⍤⌺'
+
+     _Op ← {(1=≢62⎕atx'⍺⍺')∨3≠40 ⎕atx'⍺⍺' : ⍕⍺⍺,⍬ ⋄ Dfn Drop (⍺⍴'⍺') ⍺⍺ '⍵'}
 
      Name ← (' ',,∘' '),∘(⍕⎕UCS)
      Esc  ← ''''∘{⊃,/3⍴¨@(⍺∘=)⍵}
      (p∆n s∆n m∆n d∆n)←'∆∆⍙⍙'Name¨¨p∆f s∆f m∆o d∆o
 
      ∆ZLIDE ← '⍬'⍨
-     ∆RANK  ← {⍺←⊢ ⋄ f←⍺ ⋄ c ← (,'⊢')≢⎕cr'f' ⋄ Pad (⍕⍺),(Pad(Dfn Drop(c⍴'⍺')⍺⍺'⍵'),'⍤',⍕⍵⍵),⍵}
-     ∆OUTER ← {⍺←⊢ ⋄ Pad (⍕⍺),(⍺⍺,'.',(Dfn Drop '⍺' ⍵⍵ '⍵')),⍵}
+     ∆OUTER ← {⍺←⊢ ⋄ f←⍺ ⋄ (,'⊢')≡⎕cr'f': ∘.×'' ⋄ Pad (⍕⍺),(Pad ⍺⍺,'.',1 ⍵⍵_Op ⍬),⍵}
 
      Drop ← {0=×/⍴r←⊃↓/1 ¯1,⊂⍵:⍵ ⋄ r}
 
      _Lit  ← ⍠'Regex' 0
      Zilde ← (          '⍬'⎕R(' ∆ZLIDE ')_Lit) ⍝ ⍬
      Slash ← ( (,d∆o∘.,s∆f)⎕R(,d∆o∘.,s∆n)_Lit) ⍝ @/
-     Rank  ← (    ('⍤',¨⎕D)⎕R(' ∆RANK '∘,¨⎕D)  _Lit) ⍝ ⍤X
-     Outer ← (         '∘.'⎕R(' ''∘'' ∆OUTER ')_Lit) ⍝ ∘.
-
+     Outer ← (   '∘.'⎕R(' ''∘'' ∆OUTER ')_Lit) ⍝ ∘.
 
      _Assign_ ← {⍎⍺,⍺⍺,⍵,⍵⍵}
      Pad ← '(',,∘')'
      Dfn ← '{',,∘'}'
      (p∆n,s∆n)('←{⍺←{⍵ ⋄ ⍺⍺} ⋄ (Pad⍣(⍬≢⍵)) (⍕⍺),'''_Assign_''',(⍕⍵) }')¨p∆f,s∆f
 
-     m∆n('←{⍺←⊢ ⋄ Pad (⍕⍺),(⍕⍺⍺,⍬),'''_Assign_''',        (⍕⍵)}')¨m∆o
-     d∆n('←{⍺←⊢ ⋄ Pad (⍕⍺),(⍕⍺⍺,⍬),'''_Assign_''',(⍕⍵⍵,⍬),(⍕⍵)}')¨d∆o
-
-
-     ⍙168 ←{⍺←⊢ ⋄ Pad ⍺,('¨',⍨Dfn Drop'⍺'(⍺⍺)'⍵'),⍵}
-     ⍙9016←{⍺←⊢ ⋄ Pad ⍺,('⌸',⍨Dfn Drop'⍺'(⍺⍺)'⍵'),⍵}
+     m∆n('←{⍺←⊢ ⋄ Pad (⍕⍺),(Pad (1 ⍺⍺_Op ⍬),'''_Assign_'''),          (⍕⍵)}')¨m∆o
+     d∆n('←{⍺←⊢ ⋄ Pad (⍕⍺),(Pad (1 ⍺⍺_Op ⍬),'''_Assign_''',(⍵⍵_Op⍨1)),(⍕⍵)}')¨d∆o
 
      ∆8866←{⍺←⍵ ⋄ ⍵≡⍬:(⍕⍺),'⊢',(⍕⍵) ⋄ ⍺⊢⍥⍕⍵}
      ∆8867←{⍺←⍵ ⋄ ⍵≡⍬:(⍕⍺),'⊣',(⍕⍵) ⋄ ⍺⊣⍥⍕⍵}
+
+     ⍙9060←{⍺←⊢ ⋄ f←⍺ ⋄ 2=40 ⎕atx'⍵⍵' : Pad (⍕⍺),(Pad (⍵ ⍺⍺_Op⍨ (,'⊢')≢⎕cr'f'),'⍤',⍕⍵⍵),(⍕⍵) ⋄ ⍵≡⍬:(⍕⍺⍺,⍬),'⍤',(⍕⍵⍵,⍬) ⋄ ⍺(⍺⍺⍤⍵⍵)⍵ }
 
      ⍙9051←{⍺←⍵ ⋄ ⍵≡⍬:(⍕⍺⍺,⍬),'⍛',(⍕⍵⍵,⍬) ⋄ ⍵ ⍵⍵⍨⍺⍺ ⍺}
      ⍙9064←{⍺←⍵ ⋄ ⍵≡⍬:(⍕⍺⍺,⍬),'⍨'         ⋄ ⍵(⍕⍺⍺⊣⊢)⍺}
      ⍙9061←{⍺←⊢ ⋄ ⍵≡⍬:(⍕⍺⍺,⍬),'⍥',(⍕⍵⍵,⍬) ⋄ ⍺(⍺⍺⍥⍵⍵)⍵}
      ⍙8728←{⍺←⊢ ⋄ ⍵≡⍬:(⍕⍺⍺,⍬),'∘',(⍕⍵⍵,⍬) ⋄ ⍺(⍺⍺∘⍵⍵)⍵}
-     ⍙9060←{⍺←⊢ ⋄ ⍵≡⍬:(⍕⍺⍺,⍬),'⍤',(⍕⍵⍵,⍬) ⋄ ⍺(⍺⍺⍤⍵⍵)⍵}
 
-     train ← (('''[^'']+''',⍥⊆' *\'∘,¨p∆f,m∆o,d∆o)⎕R('&',p∆n,m∆n,d∆n))Outer Slash Zilde Rank Esc train
+     train ← (('''[^'']+''',⍥⊆' *\'∘,¨p∆f,m∆o,d∆o)⎕R('&',p∆n,m∆n,d∆n))Outer Slash Zilde Esc train
 
     :Trap 0
-        o←⊂{⍵,'Y'} Dfn Drop (f ← ⍎train)'⍵'
-        :If 2∊⎕nc'f' ⋄ o ← 'SYNTAX ERROR' ⋄ :EndIf
+        o←⊂({⍵,'Y'}⍣pretty) Dfn Drop (f ← ⍎train)'⍵'
+        :If 3≠40 ⎕ATX 'f' ⋄ o ← 'SYNTAX ERROR' ⋄ :EndIf
     :Else
         o←⎕DMX.(Message{⍵,⍺,⍨': '/⍨×≢⍺}⎕EM 200|EN-200)
     :EndTrap
 
     :Trap 0
-        p←⊂{'X',⍵,'Y'} Dfn Drop '⍺'(f ← ⍎train)'⍵'
-        :If 2∊⎕nc'f' ⋄ p ← 'SYNTAX ERROR' ⋄ :EndIf
+        p←⊂({'X',⍵,'Y'}⍣pretty) Dfn Drop '⍺'(f ← ⍎train)'⍵'
+        :If 3≠40 ⎕ATX 'f' ⋄ p ← 'SYNTAX ERROR' ⋄ :EndIf
     :Else
         p←⎕DMX.(Message{⍵,⍺,⍨': '/⍨×≢⍺}⎕EM 200|EN-200)
     :EndTrap
