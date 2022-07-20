@@ -31,14 +31,20 @@
     f = async () => {
       const explain = await fetch("explain.aplf").then((r) => r.text());
       let socket = new WebSocket("wss://dyalog.run/api/v0/ws/execute");
-      socket.onopen = () =>
+
+      let expr = document.getElementById("expr").value.replace(/\'/g, "''");
+
+      socket.onopen = () => {
+      if (expr){
         socket.send(
           MessagePack.encode({
             language: "dyalog_apl",
-            code: explain + "\n ⎕ ← 1 explain '" + document.getElementById("expr").value.replace(/\'/g, "''") + "'",
+            code: explain + "\n ⎕ ← 1 explain '" + expr + "'",
             timeout: 5,
           })
         );
+      }
+    }
 
       socket.onmessage = async (event) => {
         const values = JSON.parse(
