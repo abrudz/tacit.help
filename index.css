@@ -10,7 +10,7 @@ body { background:#ddd; text-align: center; font-family: sans-serif }
 
 input,.o { flex: 1; padding: 8px; overflow-wrap: break-word; resize: none; text-align: left; margin:auto; }
 
-.o { background: #eee; }
+.o { background: #eee; white-space: pre-wrap; }
 
 .container { margin-top: 1.618em; }
 

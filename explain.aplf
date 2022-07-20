@@ -20,9 +20,16 @@
      Drop ← {0=×/⍴r←⊃↓/1 ¯1,⊂⍵ : ⍵ ⋄ '()'≡(⊣/,⊢/)⍵ : r ⋄ ⍵}
 
      _Lit  ← ⍠'Regex' 0
-     Zilde ← (          '⍬'⎕R(' ∆ZLIDE ')_Lit) ⍝ ⍬
-     Slash ← ( (,d∆o∘.,s∆f)⎕R(,d∆o∘.,s∆n)_Lit) ⍝ @/
-     Outer ← (   '∘.'⎕R(' ''∘'' ∆OUTER ')_Lit) ⍝ ∘.
+     train ← (          '⍬'⎕R(      ' ∆ZLIDE ')_Lit)train ⍝ ⍬
+     train ← ( (,d∆o∘.,s∆f)⎕R(      ,d∆o∘.,s∆n)_Lit)train ⍝ @/
+     train ← (         '∘.'⎕R(' ''∘'' ∆OUTER ')_Lit)train ⍝ ∘.
+     train ← (         '⎕A'⎕R( ' ∆A '         )_Lit)train ⍝ ⎕A
+
+     train ← (            ('\( *\'∘,¨s∆f)⎕R(              '(',¨s∆n,¨' ')⍠'Regex'(1 0))train  ⍝ (/
+     train ← (             ('^ *\'∘,¨s∆f)⎕R(                   s∆n,¨' ')⍠'Regex'(1 0))train  ⍝ /
+     train ← ((,('''⍬',⎕D)∘.,' *\'∘,¨s∆f)⎕R(,('''⍬',⎕D)∘.,' ',¨s∆n,¨' ')⍠'Regex'(1 0))train  ⍝ I/
+
+     ∆A   ← {'⎕A'}
 
      _Assign_ ← {⍎⍺,⍺⍺,⍵,⍵⍵}
      Pad ← '(',,∘')'
@@ -42,8 +49,7 @@
      ⍙9061←{⍺←⊢ ⋄ ⍵≡⍬:(⍕⍺⍺,⍬),'⍥',(⍕⍵⍵,⍬) ⋄ ⍺(⍺⍺⍥⍵⍵)⍵}
      ⍙8728←{⍺←⊢ ⋄ ⍵≡⍬:(⍕⍺⍺,⍬),'∘',(⍕⍵⍵,⍬) ⋄ ⍺(⍺⍺∘⍵⍵)⍵}
 
-     train ← ((('''[^'']+''') ,⍥⊆ u∆f,' *\'∘,¨p∆f,m∆o,d∆o)⎕R('&',u∆n,p∆n,m∆n,d∆n))Outer Slash Zilde Esc train
-
+     train ← ((('''[^'']+''') ,⍥⊆ u∆f,' *\'∘,¨p∆f,m∆o,d∆o)⎕R('&',u∆n,p∆n,m∆n,d∆n))train
     :Trap 0
         o←⊂({⍵,'Y'}⍣pretty) Dfn Drop (f ← ⍎train)'⍵'
         :If 3≠40 ⎕ATX 'f' ⋄ o ← 'SYNTAX ERROR' ⋄ :EndIf
