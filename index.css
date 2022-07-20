@@ -1,0 +1,39 @@
+      * { box-sizing: border-box;align-items:center}
+
+      @font-face { font-family: A; src: local('SAX2'), url(SAX2.ttf) }
+      
+      code,input,pre{font-family: A;white-space:pre}
+
+      body{background:#ddd;text-align:center;font-family:sans-serif}
+
+      .container{ display: flex; flex-direction: row; justify-content: center; width: 100%; margin: 0; 
+      }
+
+      input,.o{ flex: 1; padding: 8px; overflow-wrap: break-word; resize: none; text-align: left; 
+      margin:auto;
+      }
+
+      .o {
+        background: #eee;
+      }
+
+      .container {
+        margin-top: 1.618em;
+      }
+      
+      main, input { 
+        max-width: 34em; margin: 0 auto;font-size: 21px;font-weight: 600;
+      }
+
+      .container label{
+        width: 5em;
+        text-align:right;
+        padding-right: .618ex;
+      }
+   .container pre{
+             display: inline-block;
+   }
+
+@media (prefers-color-scheme: dark) {
+ html{filter: invert(1) hue-rotate(180deg);}
+}

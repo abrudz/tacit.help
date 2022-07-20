@@ -1,69 +1,30 @@
 <html>
-  <head><meta charset="utf-8" />
+  <head>
+    <title>Tacit Help - Transform tacit APL into dfn form</title>
+    <meta charset="utf-8" />
     <script src="msgpack.min.js"></script>
-    <style>
-      @font-face { font-family: A; src: local('SAX2'), url(SAX2.ttf) }*{font-family: A;}
-
-      body{background:#e8e8e8;}
-
-      .container{ display: flex; flex-direction: row; justify-content: center; width: 100%; margin: 0; }
-
-      * { box-sizing: border-box;}
-
-      input,.o{ font-size: 21px; flex: 1; padding: 8px; overflow-wrap: break-word; resize: none; text-align: left; border: none;}
-        input:focus,div:focus { outline: none; }
-
-      .o {
-        background: white;
-      }
-
-      .container {
-        margin-top: 1.618em;
-      }
-      
-      main { 
-        width: 33%;
-      }
-
-      label{
-        font-size: 18px;
-        font-weight: 600;
-      }
-
-      .container label:first-child{
-        background: #ccc;
-        text-align: center;
-        width: 3.5em;
-      }
-
-      .arrow{
-        width: 3em;
-        text-align: center;
-      }
-
-
-    </style>
+    <link rel="stylesheet" href="/index.css">
   </head>
-  <center>
-    <h1>(+⌿÷≢)Y ←→ {((+⌿)⍵)÷(≢⍵)}Y</h1>
-    <h2>Transform tacit APL into dfn form.</h2>
+  <body>
+    <h1><code>+⌿÷≢</code> ⇒ <code>{((+⌿)⍵)÷(≢⍵)}Y</code></h1>
+    <h2>Transform tacit APL into dfn form</h2>
     <main>
       <div class="container">
-        <label><pre>f</pre></label><label class="arrow"><pre> ← </pre></label>
+        <label for="expr"><pre>f ←</pre></label>
         <input id="expr" autocomplete="off" spellcheck="false" oninput="f()" />
       </div>
       <section>
       <div class="container">
-        <label><pre>f Y</pre></label><label class="arrow"><pre> ←→ </pre></label>
-      <div class="o" id="prfx">&nbsp;</div>
+        <label for="prfx"><pre>f Y</pre> ⇔</label>
+      <pre class="o" id="prfx">&nbsp;</pre>
     </div>
     <div class="container">
-        <label><pre>X f Y</pre></label><label class="arrow"><pre> ←→ </pre></label>
-    <div class="o" id="infx">&nbsp;</div>
+        <label for="infx"><pre>X f Y</pre> ⇔</label>
+    <pre class="o" id="infx">&nbsp;</pre>
     </div>
     </section>
     </main>
-  </center>
+  </body>
 
   <script>
 
