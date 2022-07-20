@@ -1,40 +1,22 @@
-      * { box-sizing: border-box;align-items:center}
+* { box-sizing: border-box; align-items: center }
 
-      @font-face { font-family: A; src: local('SAX2'), url(SAX2.ttf) }
-      
-      code,input,pre{font-family: A;white-space:pre}
+@font-face { font-family: A; src: local('SAX2'), url(SAX2.ttf) }
 
-      body{background:#ddd;text-align:center;font-family:sans-serif}
+code,input,pre { font-family: A; white-space: pre }
 
-      .container{ display: flex; flex-direction: row; justify-content: center; width: 100%; margin: 0; 
-      }
+body { background:#ddd; text-align: center; font-family: sans-serif }
 
-      input,.o{ flex: 1; padding: 8px; overflow-wrap: break-word; resize: none; text-align: left; 
-      margin:auto;
-      }
+.container { display: flex; flex-direction: row; justify-content: center; width: 100%; margin: 0;  }
 
-      .o {
-        background: #eee;
-      }
+input,.o { flex: 1; padding: 8px; overflow-wrap: break-word; resize: none; text-align: left; margin:auto; }
 
-      .container {
-        margin-top: 1.618em;
-      }
-      
-      main, input { 
-        max-width: 34em; margin: 0 auto;font-size: 21px;font-weight: 600;
-      }
+.o { background: #eee; }
 
-      .container label{
-        min-width: 5em;
-        overflow: auto;
-        text-align:right;
-        padding-right: .618ex;
-      }
-   .container pre{
-             display: inline-block;
-   }
+.container { margin-top: 1.618em; }
 
-@media (prefers-color-scheme: dark) {
- html{filter: invert(1) hue-rotate(180deg);}
-}
+main, input { max-width: 34em; margin: 0 auto; font-size: 21px; font-weight: 600; }
+
+.container label { min-width: 5em; overflow: auto; text-align: right; padding-right: 0.618ex; }
+.container pre { display: inline-block; }
+
+@media (prefers-color-scheme: dark) {html{ filter: invert(1) hue-rotate(180deg); }}
