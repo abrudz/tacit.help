@@ -7,21 +7,20 @@
     <link rel="icon" href="favicon.svg" sizes="any" type="image/svg+xml">
   </head>
   <body>
-    <h1><code>+⌿÷≢</code> ⇒ <code>{((+⌿)⍵)÷(≢⍵)}Y</code></h1>
-    <h2>Transform tacit APL into dfn form</h2>
+    <h1>Transform tacit APL into dfn form</h1>
     <main>
       <div class="container">
         <label for="expr"><pre>f ←</pre></label>
-        <input id="expr" autocomplete="off" spellcheck="false" oninput="f()" />
+        <input id="expr" autocomplete="off" spellcheck="false" oninput="f()" placeholder="+⌿÷⊣∘≢"/>
       </div>
       <section>
       <div class="container">
         <label for="prfx"><pre>f Y</pre> ⇔</label>
-      <pre class="o" id="prfx">&nbsp;</pre>
+      <pre class="o" id="prfx">{((+⌿)⍵)÷(≢⍵)}Y</pre>
     </div>
     <div class="container">
         <label for="infx"><pre>X f Y</pre> ⇔</label>
-    <pre class="o" id="infx">&nbsp;</pre>
+    <pre class="o" id="infx">X{(⍺(+⌿)⍵)÷⍺}Y;</pre>
     </div>
     </section>
     </main>
@@ -45,8 +44,8 @@
           })
         );
     } else {
-      document.getElementById("prfx").textContent = " ";
-      document.getElementById("infx").textContent = " ";
+      document.getElementById("prfx").textContent = "{((+⌿)⍵)÷(≢⍵)}Y";
+      document.getElementById("infx").textContent = "X{(⍺(+⌿)⍵)÷⍺}Y";
     }
   }
 
