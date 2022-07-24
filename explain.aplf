@@ -1,67 +1,93 @@
 ∇ r←pretty explain train
  :With ⎕NS''
+
+     train ← '''' {⍵/⍨3 1⌷⍨⊂⍵⍳⍨,⍺} train
+
+     _Lit  ← ⍠'Regex' 0
+     train ← ('⍬'⎕R(' ''⍬'' ')_Lit)train  ⍝ ⍬
+
+     train ← ('(?i)⎕A'⎕R(' ''⎕A'' ')⍠'Regex'(1 0))train ⍝ ⎕A
+     train ← ('(?i)⎕D'⎕R(' ''⎕D'' ')⍠'Regex'(1 0))train ⍝ ⎕D
+
      p∆f ← '+-×÷⌈⌊*⍟|!○~∨∧⍱⍲<≤=≥>≠≡≢⍴,⍪⍳↑↓?⍒⍋⍉⌽⊖∊⊥⊤⍎⍕⌹⊂⊃∪∩⍷⌷⊆⊢⊣⍸'
      s∆f ← '/⌿\⍀'
      m∆o ← '/⌿\⍀¨⍨&⌶⌸'
-     d∆o ← '.@∘⍛⍣⍥⍠⍤⌺'
-     u∆f ← ⎕C ⎕A
+     d∆o ← '.⍛∘⍤⍥⍣⍠⌺@'
 
-     A B C D E F G H I J K L M N O P Q R S T U V W X Y Z ← ⎕A
-
+     op   ← 4
      dfn  ← 3.2
      trad ← 3.1
      fn   ← 3
      arr  ← 2
 
-     _Src  ← {62⎕atx'⍺⍺'⋄⍺⍺}
-     _Nc   ← {42⎕atx'⍺⍺'⋄⍺⍺}
-     _Type ← {40⎕atx'⍺⍺'⋄⍺⍺}
+     ∆v   ← 900⌶
+     ∆xr  ← 183⌶
+
+     :Trap 0 ⋄ q ← ⍎train ⋄ :EndTrap
+
+     Name   ← (' ',,∘' '),∘(⍕⎕UCS)
+     Parens ← {0=≡⍵:⍕⍵⋄'(',(∇¨⍵),')'}
+
+     Drop   ← {0=×/⍴r←⊃↓/1 ¯1,⊂⍵ : ⍵ ⋄ '()'≡(⊣/,⊢/)⍵ : r ⋄ ⍵}
+
+     train ← ⍕Parens (⎕nr 'q') {
+       ⍺ (0∧.≠,)⍥≡ ⍵ : ⍺∇¨⍵
+       ~⊃⍺∊'/⌿\⍀'    : ⍺
+       ⊃op=⍵ : '⍙' Name ⍺
+               '∆' Name ⍺
+      } ∆xr 'q'
+
+      train ← '''' {⍵/⍨3 1⌷⍨⊂⍵⍳⍨,⍺} train
+
+     _Src ← {62⎕atx'⍺⍺'⋄⍺⍺}
+     _Nc  ← {42⎕atx'⍺⍺'⋄⍺⍺}
+     _Tc  ← {40⎕atx'⍺⍺'⋄⍺⍺}
 
      _Op ← {
         nc  ← ⍺⍺_Nc  ⍬
         src ← ⍺⍺_Src ⍬
-        ((trad=nc)∧2=≢src)∨fn≠⍺⍺_Type⍬ : ⍕⍺⍺,⍬
+        (trad=nc)∨fn≠⍺⍺_Tc ⍬ : ⍕⍺⍺,⍬
         dfn=nc : ⊃src
 
         Dfn Drop (⍺⍴'⍺')(⍺⍺)'⍵'
-        }
-
-     Name ← (' ',,∘' '),∘(⍕⎕UCS)
-     (p∆n s∆n u∆n m∆n d∆n)←'∆∆∆⍙⍙'Name¨¨p∆f s∆f u∆f m∆o d∆o
+       }
 
      ∆ZILDE ← '⍬'⍨
-     ∆OUTER ← {⍺←⊢ ⋄ f←⍺ ⋄ (,'⊢')≡⎕cr'f': ∘.×'' ⋄ Pad (⍕⍺),(Pad ⍺⍺,'.',1 ⍵⍵_Op ⍬),⍵}
-
-     Drop ← {0=×/⍴r←⊃↓/1 ¯1,⊂⍵ : ⍵ ⋄ '()'≡(⊣/,⊢/)⍵ : r ⋄ ⍵}
-
-     _Lit  ← ⍠'Regex' 0
-     train ←  ''''∘{⊃,/3⍴¨@(⍺∘=)⍵}train
-     train ← (          '⍬'⎕R(      ' ∆ZILDE ')_Lit)train ⍝ ⍬
-     train ← ( (,d∆o∘.,s∆f)⎕R(      ,d∆o∘.,s∆n)_Lit)train ⍝ @/
-     train ← (         '∘.'⎕R(' ''∘'' ∆OUTER ')_Lit)train ⍝ ∘.
-     train ← (         '⎕A'⎕R( ' ∆A '         )_Lit)train ⍝ ⎕A
-
-     train ← (            ('\( *\'∘,¨s∆f)⎕R(              '(',¨s∆n,¨' ')⍠'Regex'(1 0))train  ⍝ (/
-     train ← (             ('^ *\'∘,¨s∆f)⎕R(                   s∆n,¨' ')⍠'Regex'(1 0))train  ⍝ /
-     train ← ((,('''⍬',⎕D)∘.,' *\'∘,¨s∆f)⎕R(,('''⍬',⎕D)∘.,' ',¨s∆n,¨' ')⍠'Regex'(1 0))train  ⍝ I/
+     train ← ('⍬'⎕R(' ∆ZILDE ')_Lit)train ⍝ ⍬
 
      ⎕fx 'r←∆A' 'r←''⎕A'''
+     ⎕fx 'r←∆D' 'r←''⎕D'''
+
+     train ← ('⎕A'⎕R(' ∆A ')_Lit)train ⍝ ⎕A
+     train ← ('⎕D'⎕R(' ∆D ')_Lit)train ⍝ ⎕D
+
+     ∆OUTER ← {⍺←⊢ ⋄ f←⍺ ⋄ (,'⊢')≡⎕cr'f': ∘.×'' ⋄ Pad (⍕⍺),(Pad ⍺⍺,'.',1 ⍵⍵_Op ⍬),⍵}
+     train ← ('∘.'⎕R(' ''∘'' ∆OUTER ')_Lit)train ⍝ ∘.
+
+     (p∆n s∆n m∆n d∆n)←'∆∆⍙⍙'Name¨¨p∆f s∆f m∆o d∆o
 
      _Assign_ ← {⍎⍺,⍺⍺,⍵,⍵⍵}
-     Pad ← '(',,∘')'
      Dfn ← '{',,∘'}'
-     (p∆n,u∆n,s∆n){⎕fx ('r←{x}',⍺,'y')(':If 900⌶⍬ ⋄ x ← {⍵ ⋄ ⍺⍺} ⋄ :EndIf ⋄ r←(Pad⍣(⍬≢y)) (⍕x),''',⍵,''',⍕y')}¨p∆f,u∆f,s∆f
+     Pad ← '(',,∘')'
+     (p∆n,s∆n){⎕fx ('r←{x}',⍺,'y')(':If ∆v⍬ ⋄ x ← {⍵ ⋄ ⍺⍺} ⋄ :EndIf ⋄ r←(Pad⍣(⍬≢y)) (⍕x),''',⍵,''',⍕y')}¨p∆f,s∆f
 
-     m∆n('←{⍺←⊢ ⋄ Pad (⍕⍺),(Pad (1 (⍺⍺_Op) ⍬),'''_Assign_'''),          (⍕⍵)}')¨m∆o
-     d∆n('←{⍺←⊢ ⋄ Pad (⍕⍺),(Pad (1 (⍺⍺_Op) ⍬),'''_Assign_''',(⍵⍵_Op⍨1)),(⍕⍵)}')¨d∆o
+     m∆n('←{⍺←⊢ ⋄ Pad (⍕⍺),(Pad (⍺⍺_Op⍨1),'''_Assign_'''),          (⍕⍵)}')¨m∆o
+     d∆n('←{⍺←⊢ ⋄ Pad (⍕⍺),(Pad (⍺⍺_Op⍨1),'''_Assign_''',(⍵⍵_Op⍨1)),(⍕⍵)}')¨d∆o
 
-     ⎕fx 'r ← {x} ∆8866 y' ':If 900⌶⍬ ⋄ x ← y ⋄ :EndIf ⋄ :If y≡⍬ ⋄r←(⍕x),''⊢'',(⍕y)⋄:Else ⋄ r←x⊢⍥⍕y ⋄ :EndIf'
-     ⎕fx 'r ← {x} ∆8867 y' ':If 900⌶⍬ ⋄ x ← y ⋄ :EndIf ⋄ :If y≡⍬ ⋄r←(⍕x),''⊣'',(⍕y)⋄:Else ⋄ r←x⊣⍥⍕y ⋄ :EndIf'
+     ⎕fx 'r ← {x} ∆8866 y' ':If ∆v⍬ ⋄ x ← y ⋄ :EndIf ⋄ :If y≡⍬ ⋄r←(⍕x),''⊢'',(⍕y)⋄:Else ⋄ r←x⊢⍥⍕y ⋄ :EndIf'
+     ⎕fx 'r ← {x} ∆8867 y' ':If ∆v⍬ ⋄ x ← y ⋄ :EndIf ⋄ :If y≡⍬ ⋄r←(⍕x),''⊣'',(⍕y)⋄:Else ⋄ r←x⊣⍥⍕y ⋄ :EndIf'
+
+
+     ⍙46←{
+        ⍺←⊢⋄f←⍺
+        (⍺⍺_Tc ⍬) (arr ∨.= ,)⍵⍵_Tc ⍬: (⍕⍺⍺),'.',(⍕⍵⍵)
+        Pad (⍕⍺),(Pad (⍺⍺_Op⍨1),'.',(⍵⍵_Op⍨1)),(⍕⍵)
+       }
+
 
      ⍙9060←{
-        ⍺←⊢
-        f←⍺
-        arr=⍵⍵_Type ⍬: Pad (⍕⍺),(Pad (⍵ ⍺⍺_Op⍨ (,'⊢')≢⎕cr'f'),'⍤',⍕⍵⍵),(⍕⍵)
+        ⍺←⊢⋄f←⍺
+        arr=⍵⍵_Tc ⍬: Pad (⍕⍺),(Pad (⍵ ⍺⍺_Op⍨ (,'⊢')≢⎕cr'f'),'⍤',⍕⍵⍵),(⍕⍵)
         ⍵≡⍬:(⍕⍺⍺,⍬),'⍤',(⍕⍵⍵,⍬)
         ⍺(⍺⍺⍤⍵⍵)⍵
        }
@@ -74,23 +100,23 @@
      c∆n ← '∆ZILDE' '''∘''∆OUTER' '⍙9060' '⍙9051' '⍙9064' '⍙9061' '⍙8728'
      c∆o ← '⍬' '∘.' '⍤' '⍛' '⍨' '⍥' '∘'
 
-     train ← (('''[^'']+''' ,⍥⊆ u∆f,' *\'∘,¨p∆f,m∆o,d∆o)⎕R('&',u∆n,p∆n,m∆n,d∆n))train
+     train ← (('''[^'']+''' ,⍥⊆ ' *\'∘,¨p∆f,m∆o,d∆o)⎕R('&',p∆n,m∆n,d∆n))train
     :Trap 0
-        o← ({⍵,'Y'}⍣pretty) Dfn Drop (f ← ⍎train)'⍵'
-        o←⊂((c∆n,{'\s?',(⊃↓/1 ¯1,⊂⍵),'\s?'}¨ p∆n,m∆n,d∆n)⎕R(,¨c∆o,p∆f,m∆o,d∆o)⍠'Regex'(1 0))o
+        o← ({⍵,'Y'}⍣pretty) Dfn Drop (tr ← ⍎train)'⍵'
+        :If fn≠tr _Tc ⍬ ⋄ o ← 'SYNTAX ERROR' ⋄ :EndIf
 
-        :If fn≠f _Type ⍬ ⋄ o ← 'SYNTAX ERROR' ⋄ :EndIf
+        o←⊂((c∆n,{'\s?',(⊃↓/1 ¯1,⊂⍵),'\s?'}¨ p∆n,m∆n,d∆n)⎕R(,¨c∆o,p∆f,m∆o,d∆o)⍠'Regex'(1 0))⍕o
     :Else
-        o←⎕DMX.(Message{⍵,⍺,⍨': '/⍨×≢⍺}⎕EM 200|EN-200)
+        o←⎕DMX.(Message{⍵,⍺,⍨': '/⍨×≢⍺}⎕EM EN)
     :EndTrap
 
     :Trap 0
-        p← ({'X',⍵,'Y'}⍣pretty) Dfn Drop '⍺'(f ← ⍎train)'⍵'
-        p←⊂((c∆n,{'\s?',(⊃↓/1 ¯1,⊂⍵),'\s?'}¨ p∆n,m∆n,d∆n)⎕R(,¨c∆o,p∆f,m∆o,d∆o)⍠'Regex'(1 0))p
+        p← ({'X',⍵,'Y'}⍣pretty) Dfn Drop '⍺'(tr ← ⍎train)'⍵'
+        :If fn≠tr _Tc ⍬ ⋄ p ← 'SYNTAX ERROR' ⋄ :EndIf
 
-        :If fn≠f _Type ⍬ ⋄ p ← 'SYNTAX ERROR' ⋄ :EndIf
+        p←⊂((c∆n,{'\s?',(⊃↓/1 ¯1,⊂⍵),'\s?'}¨ p∆n,m∆n,d∆n)⎕R(,¨c∆o,p∆f,m∆o,d∆o)⍠'Regex'(1 0))⍕p
     :Else
-        p←⎕DMX.(Message{⍵,⍺,⍨': '/⍨×≢⍺}⎕EM 200|EN-200)
+        p←⎕DMX.(Message{⍵,⍺,⍨': '/⍨×≢⍺}⎕EM EN)
     :EndTrap
 
     r ← ⎕JSON o,⍥⊆ p
