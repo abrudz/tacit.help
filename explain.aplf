@@ -1,10 +1,10 @@
 ∇ r←pretty explain train
  :With ⎕NS''
 
+
      train ← '''' {⍵/⍨1+2×(⊢∧((⊢∨≠\)⍵∊'{}')≠⊢)⍺=⍵} train
 
-     _Lit  ← ⍠'Regex' 0
-     train ← ('⍬'⎕R(' ''⍬'' ')_Lit)train  ⍝ ⍬
+     train ← (('''[^'']+''' ,⍥⊆ '⍬')⎕R(,¨'&',⊂' ''⍬'' '))train  ⍝ ⍬
 
      train ← ('(?i)⎕A'⎕R(' ''⎕A'' ')⍠'Regex'(1 0))train ⍝ ⎕A
      train ← ('(?i)⎕D'⎕R(' ''⎕D'' ')⍠'Regex'(1 0))train ⍝ ⎕D
@@ -13,6 +13,8 @@
      s∆f ← '/⌿\⍀'
      m∆o ← '/⌿\⍀¨⍨&⌶⌸'
      d∆o ← '.⍛∘⍤⍥⍣⍠⌺@'
+
+     sym∆f ← 2031⌶7
 
      op   ← 4
      dfn  ← 3.2
@@ -51,23 +53,27 @@
        }
 
      ∆ZILDE ← '⍬'⍨
-     train ← ('⍬'⎕R(' ∆ZILDE ')_Lit)train ⍝ ⍬
+     train ← (('''[^'']+''' ,⍥⊆ '⍬')⎕R(,¨'&',⊂' ∆ZILDE '))train ⍝ ⍬
 
      ⎕fx 'r←∆A' 'r←''⎕A'''
      ⎕fx 'r←∆D' 'r←''⎕D'''
 
-     train ← ('⎕A'⎕R(' ∆A ')_Lit)train ⍝ ⎕A
-     train ← ('⎕D'⎕R(' ∆D ')_Lit)train ⍝ ⎕D
+     train ← ('⎕A'⎕R(' ∆A '))train ⍝ ⎕A
+     train ← ('⎕D'⎕R(' ∆D '))train ⍝ ⎕D
+
+     train ← ⊃{(('''[^'']+''' ,⍥⊆ ⍺)⎕R(,¨'&',⊂' ∆',(1↓⍺),' '))⍵}/sym∆f,⊂train ⍝ ⎕X
 
      ∆OUTER ← {⍺←⊢ ⋄ f←⍺ ⋄ (,'⊢')≡⎕cr'f': ∘.×'' ⋄ Pad (⍕⍺),(Pad ⍺⍺,'.',1 ⍵⍵_Op ⍬),⍵}
-     train ← ('∘.'⎕R(' ''∘'' ∆OUTER ')_Lit)train ⍝ ∘.
+     train ← (('''[^'']+''' ,⍥⊆ '\∘\.')⎕R(,¨'&',⊂' ''∘'' ∆OUTER '))train ⍝ ∘.
 
      (p∆n s∆n m∆n d∆n)←'∆∆⍙⍙'Name¨¨p∆f s∆f m∆o d∆o
+
+     sym∆n ← {' ∆',(1↓⍵),' '}¨sym∆f
 
      _Assign_ ← {⍎⍺,⍺⍺,⍵,⍵⍵}
      Dfn ← '{',,∘'}'
      Pad ← '(',,∘')'
-     (p∆n,s∆n){⎕fx ('r←{x}',⍺,'y')(':If ∆v⍬ ⋄ x ← {⍵ ⋄ ⍺⍺} ⋄ :EndIf ⋄ r←(Pad⍣(⍬≢y)) (⍕x),''',⍵,''',⍕y')}¨p∆f,s∆f
+     (p∆n,s∆n,sym∆n){⎕fx ('r←{x}',⍺,'y')(':If ∆v⍬ ⋄ x ← {⍵ ⋄ ⍺⍺} ⋄ :EndIf ⋄ r←(Pad⍣(⍬≢y)) (⍕x),''',⍵,''',⍕y')}¨p∆f,s∆f,sym∆f
 
      m∆n('←{⍺←⊢ ⋄ Pad (⍕⍺),(Pad (⍺⍺_Op⍨1),'''_Assign_'''),          (⍕⍵)}')¨m∆o
      d∆n('←{⍺←⊢ ⋄ Pad (⍕⍺),(Pad (⍺⍺_Op⍨1),'''_Assign_''',(⍵⍵_Op⍨1)),(⍕⍵)}')¨d∆o
