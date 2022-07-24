@@ -4,10 +4,12 @@
 
      train ← '''' {⍵/⍨1+2×(⊢∧((⊢∨≠\)⍵∊'{}')≠⊢)⍺=⍵} train
 
-     train ← (('''[^'']+''' ,⍥⊆ '⍬')⎕R(,¨'&',⊂' ''⍬'' '))train  ⍝ ⍬
+     _R_ ← {('''[^'']+''' ,⍥⊆ ⍺⍺)⎕R(,¨'&',⊆⍵⍵)⊢⍵}
 
-     train ← ('(?i)⎕A'⎕R(' ''⎕A'' ')⍠'Regex'(1 0))train ⍝ ⎕A
-     train ← ('(?i)⎕D'⎕R(' ''⎕D'' ')⍠'Regex'(1 0))train ⍝ ⎕D
+     train ← ('⍬'_R_' ''⍬'' ')train ⍝ ⍬
+
+     train ← ('(?i)⎕A'_R_' ''⎕A'' ')train ⍝ ⎕A
+     train ← ('(?i)⎕D'_R_' ''⎕D'' ')train ⍝ ⎕D
 
      p∆f ← '+-×÷⌈⌊*⍟|!○~∨∧⍱⍲<≤=≥>≠≡≢⍴,⍪⍳↑↓?⍒⍋⍉⌽⊖∊⊥⊤⍎⍕⌹⊂⊃∪∩⍷⌷⊆⊢⊣⍸'
      s∆f ← '/⌿\⍀'
@@ -53,18 +55,18 @@
        }
 
      ∆ZILDE ← '⍬'⍨
-     train ← (('''[^'']+''' ,⍥⊆ '⍬')⎕R(,¨'&',⊂' ∆ZILDE '))train ⍝ ⍬
+     train ← ('⍬'_R_' ∆ZILDE ')train ⍝ ⍬
 
      ⎕fx 'r←∆A' 'r←''⎕A'''
      ⎕fx 'r←∆D' 'r←''⎕D'''
 
-     train ← ('⎕A'⎕R(' ∆A '))train ⍝ ⎕A
-     train ← ('⎕D'⎕R(' ∆D '))train ⍝ ⎕D
+     train ← ('⎕A'_R_' ∆A ')train ⍝ ⎕A
+     train ← ('⎕D'_R_' ∆D ')train ⍝ ⎕D
 
-     train ← ⊃{(('''[^'']+''' ,⍥⊆ ⍺)⎕R(,¨'&',⊂' ∆',(1↓⍺),' '))⍵}/sym∆f,⊂train ⍝ ⎕X
+     train ← ⊃{(⍺_R_(' ∆',(1↓⍺),' '))⍵}/sym∆f,⊂train ⍝ ⎕X
 
      ∆OUTER ← {⍺←⊢ ⋄ f←⍺ ⋄ (,'⊢')≡⎕cr'f': ∘.×'' ⋄ Pad (⍕⍺),(Pad ⍺⍺,'.',1 ⍵⍵_Op ⍬),⍵}
-     train ← (('''[^'']+''' ,⍥⊆ '\∘\.')⎕R(,¨'&',⊂' ''∘'' ∆OUTER '))train ⍝ ∘.
+     train ← ('\∘\.'_R_' ''∘'' ∆OUTER ')train ⍝ ∘.
 
      (p∆n s∆n m∆n d∆n)←'∆∆⍙⍙'Name¨¨p∆f s∆f m∆o d∆o
 
@@ -104,7 +106,7 @@
      c∆n ← '∆ZILDE' '''∘''∆OUTER' '⍙9060' '⍙9051' '⍙9064' '⍙9061' '⍙8728'
      c∆o ← '⍬' '∘.' '⍤' '⍛' '⍨' '⍥' '∘'
 
-     train ← (('''[^'']+''' ,⍥⊆ ' *\'∘,¨p∆f,m∆o,d∆o)⎕R('&',p∆n,m∆n,d∆n))train
+     train ← ((' *\'∘,¨p∆f,m∆o,d∆o)_R_(p∆n,m∆n,d∆n))train
     :Trap 0
         o← ({⍵,'Y'}⍣pretty) Dfn Drop (tr ← ⍎train)'⍵'
         :If fn≠Tc 'tr'
