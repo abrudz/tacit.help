@@ -31,7 +31,7 @@
 
     const w = window
 
-    const query = window.location.search.substring(1).split('&')[0];
+    const params = new URLSearchParams(w.location.search);
     const input = document.getElementById("expr");
     
     f = async () => {
@@ -48,7 +48,7 @@
             timeout: 5,
           })
         );
-    } else if (query == "") {
+    } else if (params.get("q") == "") {
       document.getElementById("prfx").textContent = "{((+⌿)⍵)÷(≢⍵)}Y";
       document.getElementById("infx").textContent = "X{(⍺(+⌿)⍵)÷⍺}Y";
     }
@@ -66,11 +66,13 @@
     }
 
     Copy = () =>{
-      w.history.replaceState({},w.document.title,w.location.pathname + ("?" + encodeURIComponent(input.value)))
+      w.history.replaceState({},w.document.title,w.location.pathname + ("?q=" + encodeURIComponent(input.value)))
       navigator.clipboard.writeText(w.location.toString().replace("#",""))
     }
 
-      if (query != "") { input.value = decodeURIComponent(query).replace(/\'/g, "''"); }
+      if (params.get("q") != "") { 
+        input.value = decodeURIComponent(params.get("q")).replace(/\'/g, "''"); 
+      }
 
      f()
 
