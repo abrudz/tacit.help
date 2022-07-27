@@ -1,4 +1,4 @@
-* { box-sizing: border-box; align-items: center }
+* { box-sizing: border-box; align-items: center; text-decoration: none; }
 
 @font-face { font-family: A; src: local('SAX2'), url(SAX2.ttf) }
 
@@ -12,7 +12,7 @@ input,.o { flex: 1; padding: 8px; overflow-wrap: break-word; resize: none; text-
 
 .o { background: #eee; white-space: pre-wrap; }
 
-.container { margin-top: 1.618em; }
+.container { margin-top: 1.618em; align-items: center; }
 
 main, input { max-width: 34em; margin: 0 auto; font-size: 21px; font-weight: 600; }
 
@@ -20,3 +20,7 @@ main, input { max-width: 34em; margin: 0 auto; font-size: 21px; font-weight: 600
 .container pre { display: inline-block; }
 
 @media (prefers-color-scheme: dark) {html{ filter: invert(1) hue-rotate(180deg); }}
+
+.circle { height: 1.2em; border-radius: 1em; border: .25ex solid currentcolor;
+width: 1.2em; line-height: 1em; place-self: center; display: inline-block; text-align: center; color: unset; 
+margin: .2em; }

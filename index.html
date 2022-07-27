@@ -7,20 +7,21 @@
     <link rel="icon" href="favicon.svg" sizes="any" type="image/svg+xml">
   </head>
   <body>
-    <h1>Transform tacit APL into dfn form</h1>
+      <h1>Transform tacit APL into dfn form</h1>
     <main>
       <div class="container">
         <label for="expr"><pre>f ←</pre></label>
         <input id="expr" autocomplete="off" spellcheck="false" oninput="f()" placeholder="+⌿÷⊣∘≢"/>
+        <a class="circle" title="copy query URL" href="#" onclick="Copy()">#</a>
       </div>
       <section>
       <div class="container">
         <label for="prfx"><pre>f Y</pre> ⇔</label>
-      <pre class="o" id="prfx">{((+⌿)⍵)÷(≢⍵)}Y</pre>
+      <pre class="o" id="prfx"> </pre>
     </div>
     <div class="container">
         <label for="infx"><pre>X f Y</pre> ⇔</label>
-    <pre class="o" id="infx">X{(⍺(+⌿)⍵)÷⍺}Y</pre>
+    <pre class="o" id="infx"> </pre>
     </div>
     </section>
     </main>
@@ -28,12 +29,16 @@
 
   <script>
 
+    const w = window
+
+    const query = window.location.search.substring(1).split('&')[0];
+    const input = document.getElementById("expr");
+    
     f = async () => {
       const explain = await fetch("explain.aplf").then((r) => r.text());
       let socket = new WebSocket("wss://dyalog.run/api/v0/ws/execute");
 
-      let expr = document.getElementById("expr").value.replace(/\'/g, "''");
-
+      let expr = input.value.replace(/\'/g, "''");
       socket.onopen = () => {
       if (expr){
         socket.send(
@@ -43,7 +48,7 @@
             timeout: 5,
           })
         );
-    } else {
+    } else if (query == "") {
       document.getElementById("prfx").textContent = "{((+⌿)⍵)÷(≢⍵)}Y";
       document.getElementById("infx").textContent = "X{(⍺(+⌿)⍵)÷⍺}Y";
     }
@@ -59,5 +64,15 @@
         document.getElementById("infx").textContent = values[1];
       };
     }
+
+    Copy = () =>{
+      w.history.replaceState({},w.document.title,w.location.pathname + ("?" + encodeURIComponent(input.value)))
+      navigator.clipboard.writeText(w.location.toString().replace("#",""))
+    }
+
+      if (query != "") { input.value = decodeURIComponent(query).replace(/\'/g, "''"); }
+
+     f()
+
   </script>
 </html>
