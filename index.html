@@ -30,12 +30,16 @@
   <script>
 
     const w = window
+    const header = `
+    2 ⎕fix 'file:///opt/mdyalog/18.2/64/unicode/SALT/core/Utils.dyalog'
+    repObj ← Utils.repObj
+    `
 
     const params = new URLSearchParams(w.location.search);
     const input = document.getElementById("expr");
     
     f = async () => {
-      const explain = await fetch("explain.aplf").then((r) => r.text());
+      const explicit = await fetch("explicit.aplf").then((r) => r.text());
       let socket = new WebSocket("wss://dyalog.run/api/v0/ws/execute");
 
       let expr = input.value.replace(/\'/g, "''");
@@ -44,11 +48,11 @@
         socket.send(
           MessagePack.encode({
             language: "dyalog_apl",
-            code: explain + "\n ⎕ ← 1 explain '" + expr + "'",
+            code: header + explicit + "\n ⎕ ← ⎕JSON explicit '" + expr + "'",
             timeout: 5,
           })
         );
-    } else if (params.get("f") == "") {
+    } else if (params.get("f") == null) {
       document.getElementById("prfx").textContent = "{((+⌿)⍵)÷(≢⍵)}Y";
       document.getElementById("infx").textContent = "X{(⍺(+⌿)⍵)÷⍺}Y";
     }
@@ -69,8 +73,7 @@
       w.history.replaceState({},w.document.title,w.location.pathname + ("?f=" + encodeURIComponent(input.value)))
       navigator.clipboard.writeText(w.location.toString().replace("#",""))
     }
-
-      if (params.get("f") != "") { 
+      if (params.get("f") != null) { 
         input.value = decodeURIComponent(params.get("f")).replace(/\'/g, "''"); 
       }
 

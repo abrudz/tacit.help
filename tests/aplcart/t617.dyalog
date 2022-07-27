@@ -1,0 +1,1 @@
+:NameSpace t617i←'Is(⊢÷⊣*∘÷⍨1⊥*⍨∘|)'o←:EndNameSpace

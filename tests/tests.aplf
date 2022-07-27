@@ -1,0 +1,15 @@
+ r←tests
+
+ Ⓤ ← {⍺←⊢ ⋄ f←⍺⍺ ⋄ g←⍵⍵ ⋄ ⍺(g⍣¯1 f⍥g)⍵}
+
+ ⎕SE.UCMD'link.import # ''aplcart'' -overwrite'
+
+ values ← {
+     0::0
+     {⍵.o ≡ explicit ⍵.i}('#.t'∘,)Ⓤ⍕⍵
+ }¨⍳100
+
+ failed ← ⍸0=values
+ {('Failed:',{(+/⍵),'[',failed,']'}0=⍵)(↑,⍥⊂)('Passed:',+/⍵)}values
+
+⎕ ← {0::'Broken' ⋄ (⍎'.i',⍨'#.t',⍕)⍵}¨failed
