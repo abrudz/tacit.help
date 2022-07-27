@@ -48,7 +48,7 @@
             timeout: 5,
           })
         );
-    } else if (params.get("q") == "") {
+    } else if (params.get("f") == "") {
       document.getElementById("prfx").textContent = "{((+⌿)⍵)÷(≢⍵)}Y";
       document.getElementById("infx").textContent = "X{(⍺(+⌿)⍵)÷⍺}Y";
     }
@@ -66,12 +66,12 @@
     }
 
     Copy = () =>{
-      w.history.replaceState({},w.document.title,w.location.pathname + ("?q=" + encodeURIComponent(input.value)))
+      w.history.replaceState({},w.document.title,w.location.pathname + ("?f=" + encodeURIComponent(input.value)))
       navigator.clipboard.writeText(w.location.toString().replace("#",""))
     }
 
-      if (params.get("q") != "") { 
-        input.value = decodeURIComponent(params.get("q")).replace(/\'/g, "''"); 
+      if (params.get("f") != "") { 
+        input.value = decodeURIComponent(params.get("f")).replace(/\'/g, "''"); 
       }
 
      f()
