@@ -58,7 +58,7 @@
 
      Cover ← {
          0≠≡⍵:⍺ ∇¨⍵
-         ⍵=arr:'(repObj ',(repObj ⍺),')'
+         ⍵=arr:'(1 repObj ',(repObj ⍺),')'
          n ← ⊃⊆⍺
          '⎕'=1↑n:'∆',(1↓n)
          ∨/msk ← idioms∊⊆⍺: idioms/⍨¯1⌽msk
