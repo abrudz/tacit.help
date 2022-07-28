@@ -52,7 +52,7 @@
             timeout: 5,
           })
         );
-    } else if (params.get("f") == null) {
+    } else if (params.get("f") == null || expr.value != "") {
       document.getElementById("prfx").textContent = "{((+⌿)⍵)÷(≢⍵)}Y";
       document.getElementById("infx").textContent = "X{(⍺(+⌿)⍵)÷⍺}Y";
     }
