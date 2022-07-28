@@ -1,1 +1,4 @@
-:NameSpace t128i←'(100×⊢÷⍤1 0+/)'o←:EndNameSpace
+:NameSpace t128
+i←'(100×⊢÷⍤1 0+/)'
+o←'{100×(⍵(÷⍤1 0)((+/)⍵))}' '{100×(⍵(÷⍤1 0)(⍺(+/)⍵))}'
+:EndNameSpace

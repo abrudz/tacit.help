@@ -1,1 +1,4 @@
-:NameSpace t103i←'(0=⊢∘.|⍨∘⍳⌈/)Jv'o←:EndNameSpace
+:NameSpace t103
+i←'(0=⊢∘.|⍨∘⍳⌈/)'
+o←'{0=((⍳((⌈/)⍵))(∘.|)⍵)}' '{0=((⍳(⍺(⌈/)⍵))(∘.|)⍵)}'
+:EndNameSpace

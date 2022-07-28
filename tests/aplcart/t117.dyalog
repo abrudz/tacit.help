@@ -1,1 +1,4 @@
-:NameSpace t117i←'(1 2 1⍉⊢∘.-⌊/)Nm'o←:EndNameSpace
+:NameSpace t117
+i←'(1 2 1⍉⊢∘.-⌊/)'
+o←'{1 2 1⍉(⍵(∘.-)((⌊/)⍵))}' '{1 2 1⍉(⍵(∘.-)(⍺(⌊/)⍵))}'
+:EndNameSpace

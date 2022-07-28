@@ -7,7 +7,7 @@
  values ← {
      0::0
      {⍵.o ≡ explicit ⍵.i}('#.t'∘,)Ⓤ⍕⍵
- }¨⍳100
+ }¨⍳150
 
  failed ← ⍸0=values
  {('Failed:',{(+/⍵),'[',failed,']'}0=⍵)(↑,⍥⊂)('Passed:',+/⍵)}values

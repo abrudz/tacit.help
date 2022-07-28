@@ -1,1 +1,4 @@
-:NameSpace t125i←'(1/⍨∘,1,∘⍪-)Nv'o←:EndNameSpace
+:NameSpace t125
+i←'(1/⍨∘,1,∘⍪-)'
+o←'{(,(1,(⍪(-⍵))))/1}' '{(,(1,(⍪(⍺-⍵))))/1}'
+:EndNameSpace

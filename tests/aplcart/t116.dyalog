@@ -1,1 +1,4 @@
-:NameSpace t116i←'(1 0⍕10 10⊤⍳)Js'o←:EndNameSpace
+:NameSpace t116
+i←'(1 0⍕10 10⊤⍳)'
+o←'{1 0⍕((2⍴10)⊤(⍳⍵))}' '{1 0⍕((2⍴10)⊤(⍺⍳⍵))}'
+:EndNameSpace
