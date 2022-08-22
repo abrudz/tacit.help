@@ -1,7 +1,7 @@
 ---
 name: Internal Server Error
 about: Issue a report to help us resolve gaps
-title: ''
+title: 'https://tacit.help/?f='
 labels: ''
 assignees: ''
 
