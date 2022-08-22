@@ -8,8 +8,8 @@ failed ← ⍸0={0::0 ⋄ ((⍕⍵),'o.dyalog') ≡∘explicit⍥read (⍕⍵),'
 ≢failed
 ```
 
-## Build explicit.aplf
+## Build explicit.js
 
 ```
-⎕json ⊃,/⊆¨'2 ⎕FIX''file://'∘{0::⍵ ⋄ n←≢⍺ ⋄ ⊃⎕NGET 1,⍨⊂ ¯1↓⍵/⍨∨\(-n)↓(n⍴0),⍺⍷⍵}¨⊃⎕NGET 1,⍨⊂'explicit.aplf'
+'explicit.js' 1 ⎕nput⍨ '.join(''\n'')',⍨'const explicit =', ⎕json ⊃,/⊆¨'2 ⎕FIX''file://'∘{0::⍵ ⋄ n←≢⍺ ⋄ ⊃⎕NGET 1,⍨⊂ ¯1↓⍵/⍨∨\(-n)↓(n⍴0),⍺⍷⍵}¨⊃⎕NGET 1,⍨⊂'explicit.aplf'
 ```

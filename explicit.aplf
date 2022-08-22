@@ -6,6 +6,10 @@
 
  :Trap 0
   aa ← ⍎train
+  :If 2∊⎕nc 'aa'
+   R ← 2⍴⊂'SYNTAX ERROR'
+   →0
+  :EndIf
  :Else
   R ← 2⍴⊂⎕DMX.(Message{⍵,⍺,⍨': '/⍨×≢⍺}⎕EM EN)
   →0
