@@ -10,5 +10,5 @@ assignees: ''
 **Link to the failing expression**
 https://tacit.help/?f=
 
-**Suggested or Expected behavior (optional)**
+**Suggested or expected behavior (optional)**
 A description of what you expected or want to happen.
