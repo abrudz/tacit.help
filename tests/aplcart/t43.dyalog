@@ -1,4 +1,0 @@
-:NameSpace t43
-i←'((⎕D,⎕A)⌷⍨1+⊂)'
-o←'{(1+(⊂⍵))⌷''0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ''}' '{(1+(⍺⊂⍵))⌷''0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ''}'
-:EndNameSpace

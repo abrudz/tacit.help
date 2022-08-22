@@ -1,3 +1,4 @@
 {
-    "editor.fontFamily": "SAX2"
+    "editor.fontFamily": "SAX2",
+    "editor.guides.indentation": false,
 }

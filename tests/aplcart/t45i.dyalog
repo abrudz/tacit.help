@@ -1,0 +1,1 @@
+((⎕FUNTIE⊢⊢⎕FREAD⍤,¯1+2↓∘⍳/2↑⎕FSIZE)⎕FSTIE∘0)
