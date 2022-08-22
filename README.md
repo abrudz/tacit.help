@@ -8,7 +8,7 @@ failed ← ⍸0={0::0 ⋄ ((⍕⍵),'o.dyalog') ≡∘explicit⍥read (⍕⍵),'
 ≢failed
 ```
 
-## Build o.aplf
+## Build explicit.aplf
 
 ```
 ⎕json ⊃,/⊆¨'2 ⎕FIX''file://'∘{0::⍵ ⋄ n←≢⍺ ⋄ ⊃⎕NGET 1,⍨⊂ ¯1↓⍵/⍨∨\(-n)↓(n⍴0),⍺⍷⍵}¨⊃⎕NGET 1,⍨⊂'explicit.aplf'
