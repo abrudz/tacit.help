@@ -16,7 +16,7 @@
     :Else
      aa ← ns⍎train
     :End
-  :If 2∊⎕nc 'aa'
+  :If 0=⍴⎕nr 'aa'
    Df ← 2⍴⊂'SYNTAX ERROR'
    →0
   :EndIf
@@ -71,6 +71,9 @@
  2 ⎕FIX'file://ns/SlashBar.aplf'
  2 ⎕FIX'file://ns/StarDiaeresis.aplf'
  2 ⎕FIX'file://ns/TildeDiaeresis.aplf'
+ 2 ⎕FIX'file://ns/LeftArrow.aplf'
+ 2 ⎕FIX'file://ns/Ampersand.aplf'
+ 2 ⎕FIX'file://ns/I-Beam.aplf'
 
  tree ← (∆xr 'aa') {
     ⍙ ← pad ∘ flatten 1 ↓∘, ' ' ,⍤0 ∇¨
