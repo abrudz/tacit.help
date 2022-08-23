@@ -61,6 +61,9 @@ if (params.get("g") != null) {
  document.getElementById("g").value = decodeURIComponent(params.get("g"));
  document.getElementById("V2").style.display = 'inherit';
  document.getElementById("expand").textContent = '-'; 
+ document.getElementById("swap").style.display = "inherit";
 }
+if (p)
+
 run('f')
 run('g')
