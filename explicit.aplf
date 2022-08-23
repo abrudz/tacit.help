@@ -1,11 +1,11 @@
 ∇ R ← explicit train
 :With ⎕ns''
-
- {⍎⍵ ,'←{⍺←⊢ ⋄ (pad⍣(⍬≢⍵)) ⍺,''',(⍵),''',⍵}'}¨⎕c ⎕a
- A B C←112358314594370 774156178538190 998752796516730
+ ns ← ⎕ns ''
+ {ns⍎⍵ ,'←{⍺←⊢ ⋄ (pad⍣(⍬≢⍵)) ⍺,''',(⍵),''',⍵}'}¨'fghijk'
+ ns.(A B C)←112358314594370 774156178538190 998752796516730
 
  :Trap 0
-  aa ← ⍎train
+  aa ← ns⍎train
   :If 2∊⎕nc 'aa'
    R ← 2⍴⊂'SYNTAX ERROR'
    →0
@@ -90,6 +90,6 @@
    :Trap 0 ⋄ R,←⊂dfn'⍺'f'⍵' ⋄ :Else ⋄ R,←⊂⎕DMX.(Message{⍵,⍺,⍨': '/⍨×≢⍺}⎕EM EN) ⋄ :EndTrap
   :EndIf
 
-  R ← (⍕¨A B C)⎕R(,¨'ABC')⍠'Regex' 0¨R
+  R ← (⍕¨ns.A ns.B ns.C)⎕R(,¨'ABC')⍠'Regex' 0¨R
 :EndWith
 ∇

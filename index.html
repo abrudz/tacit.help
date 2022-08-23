@@ -27,8 +27,8 @@
     </section>
     </main>
     <footer>
-      Please <a
-        href=https://github.com/awagga/tacit.help/issues/new?assignees=&labels=&template=internal-server-error.md&title=https%3A%2F%2Ftacit.help%2F%3Ff%3D">report</a>
+      Please <a onclick="Copy()"
+        href=https://github.com/awagga/tacit.help/issues/new?assignees=&labels=&template=internal-server-error.md&title=>report</a>
       "Internal Server Error"s to improve the quality of this system
     </footer>
   </body>
@@ -64,7 +64,7 @@
       };
     }
 
-    Copy = () =>{
+    Copy = () => {
       w.history.replaceState({},w.document.title,w.location.pathname + ("?f=" + encodeURIComponent(i.value)))
       navigator.clipboard.writeText(w.location.toString().replace("#",""))
     }
