@@ -11,7 +11,11 @@
 
  :Trap 0
   :If 0≠idx ← illegal {⊃⍸<\⍺ {1≤≢((⍺,'(?![a-z])') ⎕S 1)⊢⍵}¨⊂⎕c ⍵} train ⋄ 'impossible' SIGNAL⍨ ⊃illegal[idx] ⋄ :Endif
-  aa ← ns⍎train
+    :Select ,train
+     :Case ,'→' ⋄ aa ← →
+    :Else
+     aa ← ns⍎train
+    :End
   :If 2∊⎕nc 'aa'
    Df ← 2⍴⊂'SYNTAX ERROR'
    →0
@@ -20,6 +24,7 @@
   Df ← 2⍴⊂⎕DMX.(Message{⍵,⍺,⍨': '/⍨×≢⍺}⎕EM EN)
   →0
  :EndTrap
+
 
  {⍎('∆',∘⍕⍵),'←{⍺←⊢ ⋄ (pad⍣(⍬≢⍵)) ⍺,''',(⎕ucs ⍵),''',⍵}'}¨2031⌶6
  {⍎('∆',1↓⍵),'←{⍺←⊢ ⋄ (pad⍣(⍬≢⍵)) ⍺,''',(     ⍵),''',⍵}'}¨2031⌶7
@@ -47,8 +52,6 @@
   ⍺⍺,⍬
  }
 
- _poke  ← {0::0 ⋄ f←⍎⍵ ⋄ ⍺⍺'f'}
-
  ∆xr ← 183⌶
 
  2 ⎕FIX'file://ns/At.aplf'
@@ -74,7 +77,7 @@
     1≤|≡⍺ : ⍺ ⍙ ⍵
     n ← ∊⍵
     ∨/(,∘⎕c⍨⎕a)∊n/⍨1⌽<\'←'⍷n : '(',n,')'
-    3.2 ≡ 42∘⎕atx _poke n : '(',(n),'_apply)'
+    ('{'=⊣/n)∧'}'=⊢/n : '(',(n),'_apply)'
     '⎕'=1↑n : '∆',1↓n
         ⍺=2 : '(1 repObj ',(repObj ⍵),')'
        1≠⍴n : 3 4 ⍙ n⊂⍨∨∘⌽⍨n⍷n
@@ -82,7 +85,7 @@
         ⍺=4 : '⍙',⍕⎕UCS n
      '(⍕',(⍕⍵),')'
    } ⎕nr 'aa'
-
+   
   f ← ⍎tree
 
   :If 4∊⎕nc'f'
