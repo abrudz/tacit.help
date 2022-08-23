@@ -1,11 +1,10 @@
 * { box-sizing: border-box; align-items: center; color: inherit; }
 
 @font-face { font-family: A; src: local('SAX2'), url(SAX2.ttf) }
-@font-face { font-family: Z; src: local('APL333'), url(apl333.ttf) }
 
 code,input,pre { white-space: pre; font-family: A; }
 
-body { background:#ddd; text-align: center; font-family: Z }
+sub,body { background:#ddd; text-align: center; font-family: sans-serif }
 
 input,.output { flex: 1; padding: 8px; overflow-wrap: break-word; resize: none; text-align: left; margin: auto; }
 main,input { font-size: 21px; font-weight: 600; }
@@ -36,3 +35,4 @@ section { flex-direction: column; max-width: 35em; }
 #V2,#swap { display: none; }
 
 #V1,#V2{ padding-left: 1em; padding-right: 1em;  margin: .618em;}
+p { all: unset; font-family: A; }
