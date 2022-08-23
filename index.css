@@ -3,7 +3,7 @@
 @font-face { font-family: A; src: local('SAX2'), url(SAX2.ttf) }
 @font-face { font-family: Z; src: local('APL333'), url(apl333.ttf) }
 
-code,input,pre { white-space: pre }
+code,input,pre { white-space: pre; font-family: A; }
 
 body { background:#ddd; text-align: center; font-family: Z }
 
@@ -16,8 +16,8 @@ a{font-weight: bold;}
 
 @media (prefers-color-scheme: dark) {html{ filter: invert(1) hue-rotate(180deg); }}
 
-.circle { height: 1.2em; border-radius: 1em; border: .25ex solid currentcolor; text-decoration: none;
-width: 1.2em; line-height: 1em; place-self: center; display: inline-block; text-align: center; color: unset; margin: .2em; }
+.circle { aspect-ratio : 1/1; cursor: pointer; font-size: 21px; user-select: none; border-radius: 50%; font-family: A; margin-bottom: .5em;
+ border: .25ex solid currentcolor; text-decoration: none; line-height: 1em; display: inline-block; text-align: center; padding: .2em}
 
 footer{ color: #666; position : absolute; bottom : 0; padding: 1.618ex;}
 
@@ -32,13 +32,7 @@ section { flex-direction: column; max-width: 35em; }
 .container { margin: .618em;}
 .container label { min-width: 5em; overflow: auto; text-align: right; padding-right: 0.618ex; }
 .container pre { display: inline-block; }
-.container * { font-family: A; }
 
-
-#isSplit:checked~#V2{
-    display: inherit !important;
-}
+#V2 { display: none; }
 
 #V1,#V2{ border: 2px solid #fff; padding-left: 1em; padding-right: 1em;  margin: .618em;}
-
-.gutter { display: none; }

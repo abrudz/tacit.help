@@ -1,2 +1,2 @@
-SYNTAX ERROR: Unable to translate "⎕THIS" to a dfn context
-SYNTAX ERROR: Unable to translate "⎕THIS" to a dfn context
+SYNTAX ERROR: "⎕this" is unable to be translated
+SYNTAX ERROR: "⎕this" is unable to be translated

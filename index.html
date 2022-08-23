@@ -7,10 +7,7 @@
     <link rel="icon" href="favicon.svg" sizes="any" type="image/svg+xml">
   </head>
   <body>
-    <h1>Transform tacit APL into dfn form
-      <label title="Toggle second pane" style="font-size: initial; user-select: none;" for="isSplit" class="circle">+</label>
-      <a title="copy query URL" style="font-size: initial; user-select: none;"  href="#" class="circle" onclick="Copy()">#</a>
-    </h1>
+    <h1>Transform tacit APL into dfn form</h1>
 
     <main class="split">
       <section id="V1" class="pane">
@@ -34,7 +31,13 @@
         </div>
       </section>
 
-      <input type="checkbox" style="display: none;" id="isSplit">
+      <div style="display: flex; flex-direction: column">
+        <div id="expand" title="Toggle second pane" onclick="Split(this)" class="circle">+</div>
+        <div title="Toggle second pane" onclick="Swap()" class="circle">⇄</div>
+        <a title="copy query URL" onclick="Copy()" href="#" class="circle">#</a>
+      </div>
+
+
       <section id="V2" class="pane">
         <div class="container">
           <label for="g">
@@ -57,8 +60,6 @@
       </section>
       
   </main>
-  
-  <pre>A, B, C: Arrays  f, g, h: Functions</pre>
 
     <footer style="z-index: 1">
       Please <a onclick="Copy()"
