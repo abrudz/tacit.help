@@ -10,7 +10,7 @@
  _ ← '[A-Za-z](?=(\s*)←)' ⎕S {⎕EX ⍵.Match}⊢train
 
  :Trap 0
-  :If 0≠idx ← illegal {⊃⍸<\⍺ {1≤≢((⍺,'(?![a-z])') ⎕S 1)⊢⍵}¨⊂⎕c ⍵} train ⋄ 'impossible' SIGNAL⍨ illegal[idx] ⋄ :Endif
+  :If 0≠idx ← illegal {⊃⍸<\⍺ {1≤≢((⍺,'(?![a-z])') ⎕S 1)⊢⍵}¨⊂⎕c ⍵} train ⋄ 'impossible' SIGNAL⍨ ⊃illegal[idx] ⋄ :Endif
   aa ← ns⍎train
   :If 2∊⎕nc 'aa'
    R ← 2⍴⊂'SYNTAX ERROR'
