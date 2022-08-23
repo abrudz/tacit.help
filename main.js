@@ -34,9 +34,17 @@ Copy = () => {
 }
 
 Split = (e) => {
-    const pane = document.getElementById('V2');
-    if (pane.style.display == 'inherit') { pane.style.display = 'none'; e.textContent = '+' } else { pane.style.display = 'inherit'; e.textContent = '-' }
-}
+    const pane = document.getElementById("V2");
+    if (pane.style.display == "inherit") {
+      pane.style.display = "none";
+      e.textContent = "+";
+      document.getElementById("swap").style.display = "none";
+    } else {
+      pane.style.display = "inherit";
+      e.textContent = "-";
+      document.getElementById("swap").style.display = "inherit";
+    }
+  };
 
 Swap = () => {
     let a,b,c,x,y,z;

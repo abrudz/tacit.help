@@ -8,5 +8,5 @@ SIGNAL ← {
  ⍵≡'monadic'    : ⎕SIGNAL 1⊆('EN' syntax)('Message' 'The function does not take a left argument')
  ⍵≡'syntax'     : ⎕SIGNAL syntax
  ⍵≡'dyadic'     : ⎕SIGNAL 1⊆('EN' syntax)('Message' 'The function requires a left argument')
- ⍵≡'impossible' : ⎕SIGNAL 1⊆('EN' syntax)('Message' ('"',⍺,'" is unable to be translated'))
+ ⍵≡'impossible' : ⎕SIGNAL 1⊆('EN' syntax)('Message' ('Cannot translate "',⍺,'"'))
 }

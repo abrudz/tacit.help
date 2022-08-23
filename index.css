@@ -33,6 +33,6 @@ section { flex-direction: column; max-width: 35em; }
 .container label { min-width: 5em; overflow: auto; text-align: right; padding-right: 0.618ex; }
 .container pre { display: inline-block; }
 
-#V2 { display: none; }
+#V2,#swap { display: none; }
 
-#V1,#V2{ border: 2px solid #fff; padding-left: 1em; padding-right: 1em;  margin: .618em;}
+#V1,#V2{ padding-left: 1em; padding-right: 1em;  margin: .618em;}
