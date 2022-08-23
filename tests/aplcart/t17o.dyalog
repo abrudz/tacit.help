@@ -1,2 +1,2 @@
-SYNTAX ERROR: "⎕this" is unable to be translated
-SYNTAX ERROR: "⎕this" is unable to be translated
+{⍵{'t'⎕NS ⍺⊣t←⍵}(⍎'⎕THIS')}
+{⍵{'t'⎕NS ⍺⊣t←⍵}(⍎'⎕THIS')}

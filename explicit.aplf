@@ -7,10 +7,10 @@
 
  illegal ← '⎕load' '⎕clear' '⎕off' '⎕cy' '⎕this' '⎕dmx' '⎕' '⍞'
 
- _ ← '[A-Za-z](?=(\s*)←)' ⎕S {⎕EX 'ns.',⍵.Match}⊢train
+ _ ← '''[^'']+'' [A-Za-z](?=(\s*)←)' ⎕S {⎕EX 'ns.',⍵.Match}⊢train
 
  :Trap 0
-  :If 0≠idx ← illegal {⊃⍸<\⍺ {1≤≢((⍺,'(?![a-z])') ⎕S 1)⊢⍵}¨⊂⎕c ⍵} train ⋄ 'impossible' SIGNAL⍨ ⊃illegal[idx] ⋄ :Endif
+  :If 0≠idx ← illegal {⊃⍸<\⍺ {1≤≢((⍺,'''[^'']+'' (?![a-z])') ⎕S 1)⊢⍵}¨⊂⎕c ⍵} train ⋄ 'impossible' SIGNAL⍨ ⊃illegal[idx] ⋄ :Endif
     :Select ,train
      :Case ,'→' ⋄ aa ← →
     :Else
@@ -79,9 +79,9 @@
     ⍙ ← pad ∘ flatten 1 ↓∘, ' ' ,⍤0 ∇¨
     1≤|≡⍺ : ⍺ ⍙ ⍵
     n ← ∊⍵
-    ∨/(,∘⎕c⍨⎕a)∊n/⍨1⌽<\'←'⍷n : '(',n,')'
-    ('{'=⊃n)∧'}'=⊃⌽n : '(',(n),'_apply)'
-    '⎕'=1↑n : '∆',1↓n
+     ('{'=⊃n)∧'}'=⊃⌽n : '(',(n),'_apply)'
+     ('{'=⊃n)<'}'=⊃⌽n : '(',(n),      ')'
+    (3 4∨.=⊃⍺)∧'⎕'=1↑n : '∆',1↓n
         ⍺=2 : '(1 repObj ',(repObj ⍵),')'
        1≠⍴n : 3 4 ⍙ n⊂⍨∨∘⌽⍨n⍷n
         ⍺=3 : '∆',⍕⎕UCS n
