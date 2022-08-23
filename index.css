@@ -4,6 +4,8 @@
 
 code,input,pre { white-space: pre; font-family: A; }
 
+code { font-size: 125% } 
+
 sub,body { background:#ddd; text-align: center; font-family: sans-serif }
 
 input,.output { flex: 1; padding: 8px; overflow-wrap: break-word; resize: none; text-align: left; margin: auto; }
