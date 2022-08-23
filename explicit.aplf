@@ -1,4 +1,4 @@
-∇ R ← explicit train
+∇ Df ← explicit train
 :With ⎕ns''
  ns ← ⎕ns''
  {ns⍎⍵ ,'←{⍺←⊢ ⋄ (pad⍣(⍬≢⍵)) ⍺,''',(⍵),''',⍵}'}¨⎕C ⎕A
@@ -13,11 +13,11 @@
   :If 0≠idx ← illegal {⊃⍸<\⍺ {1≤≢((⍺,'(?![a-z])') ⎕S 1)⊢⍵}¨⊂⎕c ⍵} train ⋄ 'impossible' SIGNAL⍨ ⊃illegal[idx] ⋄ :Endif
   aa ← ns⍎train
   :If 2∊⎕nc 'aa'
-   R ← 2⍴⊂'SYNTAX ERROR'
+   Df ← 2⍴⊂'SYNTAX ERROR'
    →0
   :EndIf
  :Else
-  R ← 2⍴⊂⎕DMX.(Message{⍵,⍺,⍨': '/⍨×≢⍺}⎕EM EN)
+  Df ← 2⍴⊂⎕DMX.(Message{⍵,⍺,⍨': '/⍨×≢⍺}⎕EM EN)
   →0
  :EndTrap
 
@@ -86,13 +86,13 @@
   f ← ⍎tree
 
   :If 4∊⎕nc'f'
-   :Trap 0 ⋄ R ←⊂dfn   ('⍺⍺'f)'⍵' ⋄ :Else ⋄ R ←⊂⎕DMX.(Message{⍵,⍺,⍨': '/⍨×≢⍺}⎕EM EN) ⋄ :EndTrap
-   :Trap 0 ⋄ R,←⊂dfn'⍺'('⍺⍺'f)'⍵' ⋄ :Else ⋄ R,←⊂⎕DMX.(Message{⍵,⍺,⍨': '/⍨×≢⍺}⎕EM EN) ⋄ :EndTrap
+   :Trap 0 ⋄ Df ←⊂dfn   ('⍺⍺'f)'⍵' ⋄ :Else ⋄ Df ←⊂⎕DMX.(Message{⍵,⍺,⍨': '/⍨×≢⍺}⎕EM EN) ⋄ :EndTrap
+   :Trap 0 ⋄ Df,←⊂dfn'⍺'('⍺⍺'f)'⍵' ⋄ :Else ⋄ Df,←⊂⎕DMX.(Message{⍵,⍺,⍨': '/⍨×≢⍺}⎕EM EN) ⋄ :EndTrap
   :Else
-   :Trap 0 ⋄ R ←⊂dfn   f'⍵' ⋄ :Else ⋄ R ←⊂⎕DMX.(Message{⍵,⍺,⍨': '/⍨×≢⍺}⎕EM EN) ⋄ :EndTrap
-   :Trap 0 ⋄ R,←⊂dfn'⍺'f'⍵' ⋄ :Else ⋄ R,←⊂⎕DMX.(Message{⍵,⍺,⍨': '/⍨×≢⍺}⎕EM EN) ⋄ :EndTrap
+   :Trap 0 ⋄ Df ←⊂dfn   f'⍵' ⋄ :Else ⋄ Df ←⊂⎕DMX.(Message{⍵,⍺,⍨': '/⍨×≢⍺}⎕EM EN) ⋄ :EndTrap
+   :Trap 0 ⋄ Df,←⊂dfn'⍺'f'⍵' ⋄ :Else ⋄ Df,←⊂⎕DMX.(Message{⍵,⍺,⍨': '/⍨×≢⍺}⎕EM EN) ⋄ :EndTrap
   :EndIf
 
-  R ← (⍕¨A B C D E F G H I J K L M N O P Q R S T U V W X Y Z)⎕R(,¨⎕A)⍠'Regex' 0¨R
+  Df ← (⍕¨A B C D E F G H I J K L M N O P Q R S T U V W X Y Z)⎕R(,¨⎕A)⍠'Regex' 0¨Df
 :EndWith
 ∇
