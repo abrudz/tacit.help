@@ -63,7 +63,6 @@ if (params.get("g") != null) {
  document.getElementById("expand").textContent = '-'; 
  document.getElementById("swap").style.display = "inherit";
 }
-if (p)
 
 run('f')
 run('g')
