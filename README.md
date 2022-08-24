@@ -1,7 +1,7 @@
 ## Tests
 ```apl
 read ← {⊃⎕NGET 1,⍨⊂'.dyalog',⍨'tests/aplcart/t',(⍕⍺),⍵}
-failed ← ⍸0⍷{22::⍬ ⋄ 'o' ≡∘explicit⍥((⊃,⍥⊆/)⍵∘read) 'i'}¨⍳150
+failed ← ⍸0⍷{22::⍬ ⋄ 'o' ≡∘explicit∘⊃⍥(⍵∘read) 'i'}¨⍳160
 ```
 
 ## Build

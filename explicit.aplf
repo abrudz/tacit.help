@@ -1,21 +1,21 @@
 ∇ Df ← explicit train
 :With ⎕ns''
+
+ ⎕fix ':Class cl' '∇ k' ':Implements Destructor' '⎕ ← ⎕json 2⍴⊂''      ''' '∇' ':EndClass'
+ _ ← ⎕new cl
+
  ns ← ⎕ns''
  {ns⍎⍵ ,'←{⍺←⊢ ⋄ (pad⍣(⍬≢⍵)) ⍺,''',(⍵),''',⍵}'}¨⎕C ⎕A
  ns.(A B C D E F G H I J K L M N O P Q R S T U V W X Y Z)←(A B C D E F G H I J K L M N O P Q R S T U V W X Y Z)←906401581768974 965716949993291 67988852284969 98297622389679 420080984422572 438841153165603 263430821026629 690829283312793 318417192647479 930034785351725 464464550011771 880199480693265 129642677927034 45849984323459 990924798541774 947049885552331 763259430847382 547116999329207 422237344533662 708685652211964 237187712939992 782976986292862 74374989772666 692244492137717 834182236843806 680542243721638
  2 ⎕FIX'file://ns/Signal.aplf'
 
- illegal ← '⎕load' '⎕clear' '⎕off' '⎕cy' '⎕this' '⎕dmx' '⎕' '⍞'
+ illegal ← '⎕load' '⎕cy' '⎕this' '⎕dmx' '⎕' '⍞'
 
- _ ← '''[^'']+'' [A-Za-z](?=(\s*)←)' ⎕S {⎕EX 'ns.',⍵.Match}⊢train
+ _ ← '[A-Za-z](?=(\s*)←)' ⎕S {⎕EX 'ns.',⍵.Match}⊢train
 
  :Trap 0
-  :If 0≠idx ← illegal {⊃⍸<\⍺ {1≤≢((⍺,'''[^'']+'' (?![a-z])') ⎕S 1)⊢⍵}¨⊂⎕c ⍵} train ⋄ 'impossible' SIGNAL⍨ ⊃illegal[idx] ⋄ :Endif
-    :Select ,train
-     :Case ,'→' ⋄ aa ← →
-    :Else
+  :If 0≠idx ← illegal {⊃⍸<\⍺ {(⊂,⍺)∊(('''[^'']+''|',⍺,'(?![a-z])') ⎕S '&')⊢⍵}¨⊂⎕c ⍵} train ⋄ 'impossible' SIGNAL⍨ ⊃illegal[idx] ⋄ :Endif
      aa ← ns⍎train
-    :End
   :If 0=⍴⎕nr 'aa'
    Df ← 2⍴⊂'SYNTAX ERROR'
    →0
@@ -24,7 +24,6 @@
   Df ← 2⍴⊂⎕DMX.(Message{⍵,⍺,⍨': '/⍨×≢⍺}⎕EM EN)
   →0
  :EndTrap
-
 
  {⍎('∆',∘⍕⍵),'←{⍺←⊢ ⋄ (pad⍣(⍬≢⍵)) ⍺,''',(⎕ucs ⍵),''',⍵}'}¨2031⌶6
  {⍎('∆',1↓⍵),'←{⍺←⊢ ⋄ (pad⍣(⍬≢⍵)) ⍺,''',(     ⍵),''',⍵}'}¨2031⌶7
@@ -83,7 +82,7 @@
      ('{'=⊃n)<'}'=⊃⌽n : '(',(n),      ')'
     (3 4∨.=⊃⍺)∧'⎕'=1↑n : '∆',1↓n
         ⍺=2 : '(1 repObj ',(repObj ⍵),')'
-       1≠⍴n : 3 4 ⍙ n⊂⍨∨∘⌽⍨n⍷n
+       1≠⍴n : {((≢⍵)⍴3 4) ⍙ ⍵}n⊂⍨~¯1⌽≠\n∊'{}'
         ⍺=3 : '∆',⍕⎕UCS n
         ⍺=4 : '⍙',⍕⎕UCS n
      '(⍕',(⍕⍵),')'
