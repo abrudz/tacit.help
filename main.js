@@ -10,12 +10,23 @@ run = async (id) => {
   
     socket.onopen = () => {
      if (i.value == ""){ expr = i.getAttribute("placeholder"); } else { expr = i.value }
-     socket.send(MessagePack.encode({language: "dyalog_apl",code: explicit + "\n ⎕ ← ⎕JSON explicit '" + expr.replace(/\'/g, "''") + "'",timeout: 5,}));
-    }
+     socket.send(
+      MessagePack.encode({
+        language: "dyalog_apl",
+        code:
+        "⎕FIX':Class class' '∇ kill' ':Implements Destructor' '⎕ ← ⎕json 2⍴⊂,'' ''' '∇' ':EndClass'\n_←⎕new class\n"  
+          + explicit
+          + "\n ⎕ ← ⎕JSON explicit '"
+          + expr.replace(/\'/g, "''")
+          + "'",
+        timeout: 5,
+      })
+    );
+  };
   
     socket.onmessage = async (event) => {
       try { 
-       values = JSON.parse(new TextDecoder().decode((await MessagePack.decodeAsync(event.data.stream())).stdout).slice(0, -1).split("\n").pop());
+       values = JSON.parse(new TextDecoder().decode((await MessagePack.decodeAsync(event.data.stream())).stdout).slice(0, -1).split("\n")[0]);
        infx.textContent = values[0];
        prfx.textContent = values[1];
       } catch {

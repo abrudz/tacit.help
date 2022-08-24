@@ -1,11 +1,11 @@
 ## Tests
 ```apl
-read ← {⊃⎕NGET 1,⍨⊂'.dyalog',⍨'tests/aplcart/t',(⍕⍺),⍵}
-failed ← ⍸0⍷{22::⍬ ⋄ 'o' ≡∘explicit∘⊃⍥(⍵∘read) 'i'}¨⍳160
+read ← ⊃∘⎕NGET 1,⍨⊂
+failed ← ⍸0⍷{0::⍬ ⋄ 'o' ≡∘explicit∘⊃⍥(read '.dyalog',⍨'tests/aplcart/t',(⍕⍵),⊢) 'i'}¨⍳160
 ```
 
 ## Build
 ```apl
-source ← '2 ⎕FIX''file://'∘{0::⍵ ⋄ n←≢⍺ ⋄ ⊃⎕NGET 1,⍨⊂ ¯1↓⍵/⍨∨\(-n)↓(n⍴0),⍺⍷⍵}¨⊃⎕NGET 1,⍨⊂'explicit.aplf'
-'explicit.js' 1 ⎕nput⍨ '.join(''\n'')' ,⍨ 'const explicit =',⎕json ⊃,/⊆¨ source
+source ← '2 ⎕FIX''file://'∘{0::⍵ ⋄ n ← ≢⍺ ⋄ read ⍵/⍨0@(≢⍵)∨\(-n)↓(n⍴0),⍺⍷⍵}¨ read 'explicit.aplf'
+'explicit.js' 1 ⎕nput⍨ 'const explicit =',(⎕json ⊃,/⊆¨ source),'.join(''\n'')'
 ```
