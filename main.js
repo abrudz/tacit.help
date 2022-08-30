@@ -27,7 +27,7 @@ run = async (id) => {
     socket.onmessage = async (event) => {
       try { 
        const stream = await MessagePack.decodeAsync(event.data.stream())
-       values = JSON.parse([stream.stderr, stream.stdout].map(x => new TextDecoder().decode(x)).filter(Boolean).join("\n").split("\n")[0]);
+       values = JSON.parse(new TextDecoder().decode(stream.stdout).split("\n")[0]);
        infx.textContent = values[0];
        prfx.textContent = values[1];
       } catch {
