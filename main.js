@@ -65,7 +65,7 @@ run = async (id) => {
 Copy = () => {
   w.history.replaceState({},w.document.title,w.location.pathname 
     + ("?f=" + encodeURIComponent(document.getElementById("f").value))
-    + (document.getElementById('V2').style.display != 'none' ? ("&g=" + encodeURIComponent(document.getElementById("g").value)) : ""));
+    + (document.getElementById('V2').offsetParent != null ? ("&g=" + encodeURIComponent(document.getElementById("g").value)) : ""));
   
   navigator.clipboard.writeText(w.location.toString().replace("#",""))
 }
