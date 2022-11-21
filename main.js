@@ -1,5 +1,28 @@
 w = window; params = new URLSearchParams(w.location.search);
 
+identical = () => {
+  const fy = document.getElementById(`fY`)
+  const gy = document.getElementById(`gY`)
+  const xfy = document.getElementById(`XfY`)
+  const xgy = document.getElementById(`XgY`)
+  if (fy.textContent == gy.textContent) {
+    fy.style.border = "3px green solid"
+    gy.style.border = "3px green solid"
+  } else {
+    fy.style.border = "initial";
+    gy.style.border = "initial";
+  }
+
+  if (xfy.textContent == xgy.textContent) {
+    xfy.style.border = "3px green solid"
+    xgy.style.border = "3px green solid"
+  } else {
+    xfy.style.border = "initial";
+    xgy.style.border = "initial";
+  }
+
+}
+
 run = async (id) => {
     const i = document.getElementById(id);
   
@@ -30,6 +53,8 @@ run = async (id) => {
        values = JSON.parse(new TextDecoder().decode(stream.stdout).split("\n")[0]);
        infx.textContent = values[0];
        prfx.textContent = values[1];
+
+       identical();
       } catch {
        infx.textContent = 'Internal Server Error';
        prfx.textContent = 'Internal Server Error';
@@ -75,6 +100,7 @@ if (params.get("g") != null) {
  document.getElementById("expand").textContent = '-'; 
  document.getElementById("swap").style.display = "inherit";
 }
+
 
 run('f')
 run('g')
