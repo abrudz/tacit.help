@@ -1,0 +1,8 @@
+ast ← { ⍝ return AST of pointfree operand
+  o ← ⍺⍺
+  XR ← 183⌶ ⍝ explain representation
+  (XR 'o') {
+    ('{'=⊃∊⍵)∧'}'=⊃⌽∊⍵ : ⍺ + 0.2 ⍝ dfn/dop
+    ⍺
+  }¨ ⎕NR 'o'
+}
