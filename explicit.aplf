@@ -13,7 +13,7 @@
 
  illegal ← '⎕load' '⎕cy' '⎕this' '⎕dmx' '⎕exception' '⎕' '⍞'
 
- _ ← '[A-Za-z](?=(\s*)←)' ⎕S {⎕EX 'ns.',⍵.Match}⊢train
+ _ ← '[A-Za-z](?=(\s*)←)' ⎕S {⎕EX 'ns.',⍵.Match}'''[^'']*''|⍝.*'⎕R''⊢train
 
  :Trap 0
   :If 0≠idx ← illegal {⊃⍸<\⍺ {(⊂,⍺)∊(('''[^'']+''|',⍺,'(?![a-z])') ⎕S '&')⊢⍵}¨⊂⎕c ⍵} train ⋄ 'impossible' SIGNAL⍨ ⊃illegal[idx] ⋄ :Endif
