@@ -34,7 +34,7 @@
 
  ⎕pp ← 34
 
- ⎕FIX 'file://',(2 ⎕NQ # 'GetEnvironment' 'DYALOG'),'/SALT/core/Utils.dyalog'
+ ⎕FIX 'file://',(2 ⎕NQ # 'GetEnvironment' 'DYALOG'),'/SALT/core/SALTUtils.dyalog'
  repObj ← Utils.repObj
 
  dfn     ← '}',⍨'{',⊢(/⍨)∨∘⌽⍨⍤⍷⍨⍲∊∘'()' ⍝ Confused? https://tacit.help
